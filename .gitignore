@@ -1,0 +1,11 @@
+figs/*.png
+*.abs
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.pdf
+*.xmpdata
