@@ -7,8 +7,8 @@
    viewBox="0 0 283.2005 123.38125"
    version="1.1"
    id="svg1"
-   inkscape:version="1.3 (0e150ed, 2023-07-21)"
-   sodipodi:docname="bridge-figure-2.svg"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   sodipodi:docname="bridges.svg"
    inkscape:export-filename="bridge-figure-2.png"
    inkscape:export-xdpi="149.975"
    inkscape:export-ydpi="149.975"
@@ -627,265 +627,252 @@
      id="layer1"
      transform="translate(-46.431967,-27.884884)">
     <g
-       id="g150">
-      <text
-         xml:space="preserve"
-         style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-         x="92.013191"
-         y="33.779072"
-         id="text1"><tspan
-           sodipodi:role="line"
-           id="tspan1"
-           style="stroke-width:0.264583"
-           x="92.013191"
-           y="33.779072">independent continuant</tspan></text>
-      <rect
-         style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
-         id="rect1"
-         width="53.11047"
-         height="8.3430243"
-         x="89.213562"
-         y="28.284885" />
+       id="g11">
       <g
-         id="g23"
-         transform="translate(21.166674)">
+         id="g10">
+        <text
+           xml:space="preserve"
+           style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
+           x="95.677902"
+           y="33.779072"
+           id="text1"><tspan
+             sodipodi:role="line"
+             id="tspan1"
+             style="stroke-width:0.264583"
+             x="95.677902"
+             y="33.779072">independent continuant</tspan></text>
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
+           id="rect1"
+           width="53.11047"
+           height="8.3430243"
+           x="89.213562"
+           y="28.284885" />
+      </g>
+      <g
+         id="g3">
         <rect
            style="fill:#37acff;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8"
            width="40.621395"
            height="8.3122406"
-           x="37.429161"
+           x="58.595837"
            y="47.219463" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="40.386951"
+           x="64.455254"
            y="52.360878"
            id="text1-1"><tspan
              sodipodi:role="line"
              id="tspan1-3"
              style="stroke-width:0.264583"
-             x="40.386951"
+             x="64.455254"
              y="52.360878">anatomical entity</tspan></text>
       </g>
       <g
-         id="g28"
-         transform="translate(-15.345837)">
+         id="g6">
         <rect
            style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-4"
            width="40.799103"
            height="8.4271278"
-           x="153.49855"
+           x="138.15271"
            y="46.924442" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="156.5452"
+           x="144.10098"
            y="52.123302"
            id="text1-1-3"><tspan
              sodipodi:role="line"
              id="tspan1-3-9"
              style="stroke-width:0.264583"
-             x="156.5452"
+             x="144.10098"
              y="52.123302">anatomical entity</tspan></text>
       </g>
       <g
-         id="g29"
-         transform="translate(-15.345837)">
+         id="g5">
         <rect
            style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-4-6"
            width="53.203407"
            height="8.342432"
-           x="147.29642"
+           x="131.95058"
            y="65.648399" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="151.62993"
+           x="139.97034"
            y="71.133057"
            id="text1-1-3-3"><tspan
              sodipodi:role="line"
              id="tspan1-3-9-0"
              style="stroke-width:0.264583"
-             x="151.62993"
+             x="139.97034"
              y="71.133057">multicellular structure</tspan></text>
       </g>
       <g
-         id="g24"
-         transform="translate(21.166674)">
+         id="g2">
         <rect
            style="fill:#37acff;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-3"
            width="53.11047"
            height="8.3430243"
-           x="31.084244"
+           x="52.250919"
            y="65.648109" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="35.371292"
+           x="60.224213"
            y="71.133064"
            id="text1-1-5"><tspan
              sodipodi:role="line"
              id="tspan1-3-4"
              style="stroke-width:0.264583"
-             x="35.371292"
+             x="60.224213"
              y="71.133064">multicellular structure</tspan></text>
       </g>
       <g
-         id="g25"
-         transform="translate(22.140387)">
+         id="g1">
         <rect
            style="fill:#37acff;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-8"
            width="16.361813"
            height="8.3566256"
-           x="48.484859"
+           x="70.625244"
            y="84.322906" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.8;stroke-dasharray:none"
-           x="50.972759"
+           x="73.946854"
            y="89.134254"
            id="text1-1-7"><tspan
              sodipodi:role="line"
              id="tspan1-3-7"
              style="stroke-width:0.8;stroke-dasharray:none"
-             x="50.972759"
+             x="73.946854"
              y="89.134254">organ</tspan></text>
       </g>
+      <rect
+         style="fill:#37acff;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
+         id="rect1-8-2"
+         width="19.564608"
+         height="8.6136312"
+         x="91.215736"
+         y="102.55132" />
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
+         x="96.231758"
+         y="107.50065"
+         id="text1-1-9"><tspan
+           sodipodi:role="line"
+           id="tspan1-3-8"
+           style="stroke-width:0.264583"
+           x="96.231758"
+           y="107.50065">ovary</tspan></text>
+      <rect
+         style="fill:#37acff;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
+         id="rect1-8-0"
+         width="39.388569"
+         height="8.4375935"
+         x="46.831966"
+         y="102.63934" />
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
+         x="50.493671"
+         y="108.16814"
+         id="text1-1-6"><tspan
+           sodipodi:role="line"
+           id="tspan1-3-2"
+           style="stroke-width:0.264583"
+           x="50.493671"
+           y="108.16814">dorsal vessel heart</tspan></text>
       <g
-         id="g27"
-         transform="translate(13.989811,-0.32469797)">
-        <rect
-           style="fill:#37acff;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
-           id="rect1-8-2"
-           width="19.564608"
-           height="8.6136312"
-           x="77.225922"
-           y="102.87602" />
-        <text
-           xml:space="preserve"
-           style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="81.397903"
-           y="107.82535"
-           id="text1-1-9"><tspan
-             sodipodi:role="line"
-             id="tspan1-3-8"
-             style="stroke-width:0.264583"
-             x="81.397903"
-             y="107.82535">ovary</tspan></text>
-      </g>
-      <g
-         id="g26"
-         transform="translate(36.74399)">
-        <rect
-           style="fill:#37acff;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
-           id="rect1-8-0"
-           width="39.388569"
-           height="8.4375935"
-           x="10.087977"
-           y="102.63934" />
-        <text
-           xml:space="preserve"
-           style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="10.917822"
-           y="108.16814"
-           id="text1-1-6"><tspan
-             sodipodi:role="line"
-             id="tspan1-3-2"
-             style="stroke-width:0.264583"
-             x="10.917822"
-             y="108.16814">dorsal vessel heart</tspan></text>
-      </g>
-      <g
-         id="g31"
-         transform="translate(-24.870843)">
+         id="g7">
         <rect
            style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-4-8"
            width="24.514067"
            height="8.5630922"
-           x="191.00983"
+           x="166.13898"
            y="102.90129" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="197.65654"
+           x="173.62973"
            y="107.82535"
            id="text1-1-3-5"><tspan
              sodipodi:role="line"
              id="tspan1-3-9-5"
              style="stroke-width:0.264583"
-             x="197.65654"
+             x="173.62973"
              y="107.82535">ovary</tspan></text>
       </g>
       <g
-         id="g30"
-         transform="translate(-2.6458334)">
+         id="g4">
         <rect
            style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-4-62"
            width="24.514069"
            height="8.5630922"
-           x="132.27234"
+           x="129.62651"
            y="102.9013" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="139.13522"
+           x="137.46866"
            y="108.49715"
            id="text1-1-3-51"><tspan
              sodipodi:role="line"
              id="tspan1-3-9-3"
              style="stroke-width:0.264583"
-             x="139.13522"
+             x="137.46866"
              y="108.49715">heart</tspan></text>
       </g>
       <g
-         id="g33"
-         transform="translate(-24.870843)">
+         id="g9">
         <rect
            style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-4-0"
            width="24.514069"
            height="8.5630922"
-           x="191.00983"
+           x="166.13898"
            y="121.98832" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="195.26306"
+           x="171.62297"
            y="127.57986"
            id="text1-1-3-4"><tspan
              sodipodi:role="line"
              id="tspan1-3-9-4"
              style="stroke-width:0.264583"
-             x="195.26306"
+             x="171.62297"
              y="127.57986">ovariole</tspan></text>
       </g>
       <g
-         id="g32"
-         transform="translate(-2.6458334)">
+         id="g8"
+         transform="translate(0.83890343)">
         <rect
            style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-4-5"
            width="39.388569"
            height="8.4375935"
-           x="123.9962"
+           x="121.35036"
            y="122.05108" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="127.17645"
+           x="126.9973"
            y="127.25517"
            id="text1-1-3-7"><tspan
              sodipodi:role="line"
              id="tspan1-3-9-50"
              style="stroke-width:0.264583"
-             x="127.17645"
+             x="126.9973"
              y="127.25517">alary muscle cell</tspan></text>
       </g>
       <path
@@ -935,7 +922,7 @@
          sodipodi:nodetypes="cc" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1, 0.5;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#ArrowWide-95)"
-         d="m 141.88349,111.46439 -0.83889,10.58669"
+         d="m 141.88349,111.46439 5e-5,10.58669"
          id="path16-8"
          sodipodi:nodetypes="cc" />
       <path
@@ -945,10 +932,10 @@
          sodipodi:nodetypes="cc" />
     </g>
     <g
-       id="g151">
+       id="g29">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1, 0.5;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#ArrowWide-95-32)"
-         d="m 263.06995,117.26145 0,9.67315"
+         d="m 263.06995,117.26145 v 9.67315"
          id="path16-8-0"
          sodipodi:nodetypes="cc" />
       <path
@@ -957,268 +944,256 @@
          id="path16-8-4"
          sodipodi:nodetypes="cc" />
       <g
-         id="g34"
-         transform="translate(183.31332,-142.2422)">
+         id="g15">
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="60.602016"
-           y="175.6839"
+           x="247.58005"
+           y="33.4417"
            id="text1-19"><tspan
              sodipodi:role="line"
              id="tspan1-34"
              style="stroke-width:0.264583"
-             x="60.602016"
-             y="175.6839">independent continuant</tspan></text>
+             x="247.58005"
+             y="33.4417">independent continuant</tspan></text>
         <rect
            style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-7"
            width="53.11047"
            height="8.3430243"
-           x="57.802387"
-           y="170.52708" />
+           x="241.11571"
+           y="28.284883" />
       </g>
       <g
-         id="g23-9"
-         transform="translate(180.44412)">
+         id="g16">
         <rect
            style="fill:#37acff;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-80"
            width="40.621395"
            height="8.3122406"
-           x="37.429161"
+           x="217.87328"
            y="47.219463" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="40.386951"
+           x="223.7327"
            y="52.360878"
            id="text1-1-75"><tspan
              sodipodi:role="line"
              id="tspan1-3-84"
              style="stroke-width:0.264583"
-             x="40.386951"
+             x="223.7327"
              y="52.360878">anatomical entity</tspan></text>
       </g>
       <g
-         id="g28-2"
-         transform="translate(125.07392,4.7937)">
+         id="g22">
         <rect
            style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-4-50"
            width="40.799103"
            height="8.4271278"
-           x="153.49855"
-           y="46.924442" />
+           x="278.57248"
+           y="51.718143" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="156.5452"
-           y="52.123302"
+           x="284.52075"
+           y="56.917004"
            id="text1-1-3-70"><tspan
              sodipodi:role="line"
              id="tspan1-3-9-7"
              style="stroke-width:0.264583"
-             x="156.5452"
-             y="52.123302">anatomical entity</tspan></text>
+             x="284.52075"
+             y="56.917004">anatomical entity</tspan></text>
       </g>
       <g
-         id="g29-1"
-         transform="translate(125.0739,3.69296)">
+         id="g23">
         <rect
            style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-4-6-0"
            width="53.203407"
            height="8.342432"
-           x="147.29642"
-           y="65.648399" />
+           x="272.37033"
+           y="69.341362" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="151.62993"
-           y="71.133057"
+           x="280.39011"
+           y="74.826019"
            id="text1-1-3-3-0"><tspan
              sodipodi:role="line"
              id="tspan1-3-9-0-8"
              style="stroke-width:0.264583"
-             x="151.62993"
-             y="71.133057">multicellular structure</tspan></text>
+             x="280.39011"
+             y="74.826019">multicellular structure</tspan></text>
       </g>
       <g
-         id="g24-0"
-         transform="translate(180.44412)">
+         id="g17">
         <rect
            style="fill:#37acff;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-3-4"
            width="53.11047"
            height="8.3430243"
-           x="31.084244"
+           x="211.52837"
            y="65.648109" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="35.371292"
+           x="219.50166"
            y="71.133064"
            id="text1-1-5-7"><tspan
              sodipodi:role="line"
              id="tspan1-3-4-6"
              style="stroke-width:0.264583"
-             x="35.371292"
+             x="219.50166"
              y="71.133064">multicellular structure</tspan></text>
       </g>
       <g
-         id="g25-1"
-         transform="translate(181.41783)">
+         id="g20">
         <rect
            style="fill:#37acff;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-8-6"
            width="16.361813"
            height="8.3566256"
-           x="48.484859"
+           x="229.90269"
            y="84.322906" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.8;stroke-dasharray:none"
-           x="50.972759"
+           x="233.2243"
            y="89.134254"
            id="text1-1-7-1"><tspan
              sodipodi:role="line"
              id="tspan1-3-7-4"
              style="stroke-width:0.8;stroke-dasharray:none"
-             x="50.972759"
+             x="233.2243"
              y="89.134254">organ</tspan></text>
       </g>
       <g
-         id="g27-9"
-         transform="translate(202.79875,-0.3247)">
+         id="g24">
         <rect
            style="fill:#37acff;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-2-6"
            width="19.564608"
            height="8.6136312"
-           x="77.225922"
-           y="102.87602" />
+           x="280.02466"
+           y="102.55132" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="81.397903"
-           y="107.82535"
+           x="285.04068"
+           y="107.50065"
            id="text1-1-9-4"><tspan
              sodipodi:role="line"
              id="tspan1-3-8-2"
              style="stroke-width:0.264583"
-             x="81.397903"
-             y="107.82535">ovary</tspan></text>
+             x="285.04068"
+             y="107.50065">ovary</tspan></text>
       </g>
       <g
-         id="g26-8"
-         transform="translate(196.02144)">
+         id="g21">
         <rect
            style="fill:#37acff;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-0-4"
            width="39.388569"
            height="8.4375935"
-           x="10.087977"
+           x="206.10942"
            y="102.63934" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="10.917822"
+           x="209.77113"
            y="108.16814"
            id="text1-1-6-4"><tspan
              sodipodi:role="line"
              id="tspan1-3-2-9"
              style="stroke-width:0.264583"
-             x="10.917822"
+             x="209.77113"
              y="108.16814">dorsal vessel heart</tspan></text>
       </g>
       <g
-         id="g31-8"
-         transform="translate(113.70858,5.79707)">
+         id="g27">
         <rect
            style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-4-8-1"
            width="24.514067"
            height="8.5630922"
-           x="191.00983"
-           y="102.90129" />
+           x="304.71841"
+           y="108.69836" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="197.65654"
-           y="107.82535"
+           x="312.20917"
+           y="113.62242"
            id="text1-1-3-5-0"><tspan
              sodipodi:role="line"
              id="tspan1-3-9-5-3"
              style="stroke-width:0.264583"
-             x="197.65654"
-             y="107.82535">ovary</tspan></text>
+             x="312.20917"
+             y="113.62242">ovary</tspan></text>
       </g>
       <g
-         id="g30-7"
-         transform="translate(118.54057,5.79706)">
+         id="g25">
         <rect
            style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-4-62-4"
            width="24.514069"
            height="8.5630922"
-           x="132.27234"
-           y="102.9013" />
+           x="250.81291"
+           y="108.69836" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="139.13522"
-           y="108.49715"
+           x="258.65506"
+           y="114.2942"
            id="text1-1-3-51-3"><tspan
              sodipodi:role="line"
              id="tspan1-3-9-3-4"
              style="stroke-width:0.264583"
-             x="139.13522"
-             y="108.49715">heart</tspan></text>
+             x="258.65506"
+             y="114.2942">heart</tspan></text>
       </g>
       <g
-         id="g33-8"
-         transform="translate(113.70857,4.88353)">
+         id="g28">
         <rect
            style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-4-0-1"
            width="24.514069"
            height="8.5630922"
-           x="191.00983"
-           y="121.98832" />
+           x="304.71838"
+           y="126.87185" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="195.26306"
-           y="127.57986"
+           x="310.20236"
+           y="132.46339"
            id="text1-1-3-4-2"><tspan
              sodipodi:role="line"
              id="tspan1-3-9-4-8"
              style="stroke-width:0.264583"
-             x="195.26306"
-             y="127.57986">ovariole</tspan></text>
+             x="310.20236"
+             y="132.46339">ovariole</tspan></text>
       </g>
       <g
-         id="g32-3"
-         transform="translate(119.37946,4.88352)">
+         id="g26">
         <rect
            style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-4-5-9"
            width="39.388569"
            height="8.4375935"
-           x="123.9962"
-           y="122.05108" />
+           x="243.37566"
+           y="126.9346" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="127.17645"
-           y="127.25517"
+           x="249.0226"
+           y="132.13869"
            id="text1-1-3-7-9"><tspan
              sodipodi:role="line"
              id="tspan1-3-9-50-9"
              style="stroke-width:0.264583"
-             x="127.17645"
-             y="127.25517">alary muscle cell</tspan></text>
+             x="249.0226"
+             y="132.13869">alary muscle cell</tspan></text>
       </g>
       <path
          style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#ArrowWide-33)"
@@ -1232,7 +1207,7 @@
          sodipodi:nodetypes="cc" />
       <path
          style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#ArrowWide-6-0)"
-         d="m 238.08361,73.99113 0,10.33178"
+         d="M 238.08361,73.99113 V 84.32291"
          id="path16-1-7"
          sodipodi:nodetypes="cc" />
       <path
@@ -1270,7 +1245,7 @@
          d="m 278.57247,55.9317 -20.0778,-4.55612"
          id="path33" />
       <path
-         style="fill:none;stroke:#ff0000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:0.5,0.5;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWide-89)"
+         style="fill:none;stroke:#ff0000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:0.5, 0.5;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWide-89)"
          d="m 272.37032,73.51257 -7.73148,-3.69295"
          id="path33-4"
          sodipodi:nodetypes="cc" />
@@ -1280,56 +1255,54 @@
          id="path33-5"
          sodipodi:nodetypes="cc" />
       <path
-         style="fill:none;stroke:#ff0000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:0.5,0.5;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWide-2)"
+         style="fill:none;stroke:#ff0000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:0.5, 0.5;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWide-2)"
          d="m 304.7184,112.97991 -5.12913,-6.12177"
          id="path33-0"
          sodipodi:nodetypes="cc" />
     </g>
     <g
-       id="g154">
+       id="g14">
       <g
-         id="g4-0"
-         transform="translate(46.232754,92.241077)">
+         id="g12">
         <rect
            style="fill:#37acff;fill-opacity:1;stroke:#000000;stroke-width:0.706;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-9"
            width="37.138676"
            height="6.3081417"
-           x="31.084244"
-           y="50.011913" />
+           x="77.317001"
+           y="142.25299" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="37.144466"
-           y="54.475979"
+           x="85.402939"
+           y="146.71706"
            id="text1-1-2"><tspan
              sodipodi:role="line"
              id="tspan1-3-49"
              style="stroke-width:0.264583"
-             x="37.144466"
-             y="54.475979">Uberon term</tspan></text>
+             x="85.402939"
+             y="146.71706">Uberon term</tspan></text>
       </g>
       <g
-         id="g17"
-         transform="translate(51.744632,-1.4628128)">
+         id="g13">
         <rect
            style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.692465;stroke-linejoin:round;stroke-dasharray:none"
            id="rect1-8-4-1"
            width="37.152538"
            height="6.3215346"
-           x="62.796871"
-           y="143.70911" />
+           x="114.5415"
+           y="142.24629" />
         <text
            xml:space="preserve"
            style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-           x="71.499519"
-           y="148.18417"
+           x="124.77979"
+           y="146.72136"
            id="text1-1-3-6"><tspan
              sodipodi:role="line"
              id="tspan1-3-9-44"
              style="stroke-width:0.264583"
-             x="71.499519"
-             y="148.18417">FBbt term</tspan></text>
+             x="124.77979"
+             y="146.72136">FBbt term</tspan></text>
       </g>
       <g
          id="g153">

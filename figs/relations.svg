@@ -7,8 +7,8 @@
    viewBox="0 0 218.60742 95.428056"
    version="1.1"
    id="svg1"
-   inkscape:version="1.3 (0e150ed, 2023-07-21)"
-   sodipodi:docname="semapv-relations-2.svg"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   sodipodi:docname="relations.svg"
    inkscape:export-filename="semapv-relations-2.png"
    inkscape:export-xdpi="149.975"
    inkscape:export-ydpi="149.975"
@@ -248,17 +248,17 @@
      id="layer1"
      transform="translate(-36.850209,-28.217498)">
     <g
-       id="g11">
+       id="g1">
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-         x="99.412392"
+         x="102.49488"
          y="33.779072"
          id="text1"><tspan
            sodipodi:role="line"
            id="tspan1"
            style="stroke-width:0.264583"
-           x="99.412392"
+           x="102.49488"
            y="33.779072">skos:mappingRelation</tspan></text>
       <rect
          style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
@@ -269,157 +269,150 @@
          y="28.617498" />
     </g>
     <g
-       id="g6"
-       transform="translate(5.9372642,-14.580558)">
+       id="g6">
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-         x="150.03236"
-         y="89.827217"
+         x="158.23392"
+         y="75.246658"
          id="text1-1-7"><tspan
            sodipodi:role="line"
            id="tspan1-4-1"
            style="stroke-width:0.264583"
-           x="150.03236"
-           y="89.827217">skos:broadMatch</tspan></text>
+           x="158.23392"
+           y="75.246658">skos:broadMatch</tspan></text>
       <rect
          style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
          id="rect1-7-9"
          width="39.313789"
          height="8.4480276"
-         x="147.19611"
-         y="84.293205" />
+         x="153.13338"
+         y="69.712646" />
     </g>
     <g
-       id="g1"
-       transform="translate(0.15457593,-32.476988)">
+       id="g2">
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-         x="61.139725"
-         y="86.832237"
+         x="64.769531"
+         y="54.355247"
          id="text1-1"><tspan
            sodipodi:role="line"
            id="tspan1-4"
            style="stroke-width:0.264583"
-           x="61.139725"
-           y="86.832237">semapv:isomorphicMatch</tspan></text>
+           x="64.769531"
+           y="54.355247">semapv:isomorphicMatch</tspan></text>
       <rect
          style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
          id="rect1-7"
          width="54.162735"
          height="8.3342371"
-         x="59.246258"
-         y="81.679825" />
+         x="59.400833"
+         y="49.202835" />
     </g>
     <g
-       id="g2"
-       transform="translate(-14.676577,-3.5554981)">
+       id="g5">
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-         x="136.66273"
-         y="57.910748"
+         x="126.31319"
+         y="54.355251"
          id="text1-1-26"><tspan
            sodipodi:role="line"
            id="tspan1-4-6"
            style="stroke-width:0.264583"
-           x="136.66273"
-           y="57.910748">semapv:nonIsomorphicMatch</tspan></text>
+           x="126.31319"
+           y="54.355251">semapv:nonIsomorphicMatch</tspan></text>
       <rect
          style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
          id="rect1-7-7"
          width="64.132988"
          height="8.2672205"
-         x="133.86829"
-         y="52.791843" />
+         x="119.19171"
+         y="49.236347" />
     </g>
     <g
-       id="g4"
-       transform="translate(-74.293228,-23.022082)">
+       id="g4">
       <rect
          style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
          id="rect1-8-4"
          width="68.973877"
          height="8.2010021"
-         x="126.28849"
-         y="112.79433" />
+         x="51.995262"
+         y="89.772247" />
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-         x="128.39333"
-         y="117.88012"
+         x="58.194584"
+         y="94.85804"
          id="text1-1-3"><tspan
            sodipodi:role="line"
            style="stroke-width:0.264583"
-           x="128.39333"
-           y="117.88012"
+           x="58.194584"
+           y="94.85804"
            id="tspan3">semapv:crossSpeciesExactMatch</tspan></text>
     </g>
     <g
-       id="g8"
-       transform="translate(-5.3238563,7.9138408)">
+       id="g10">
       <rect
          style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
          id="rect1-8-4-5"
          width="68.973877"
          height="8.2010021"
-         x="97.535507"
-         y="107.13071" />
+         x="92.211655"
+         y="115.04455" />
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-         x="99.736801"
-         y="112.21651"
+         x="98.314514"
+         y="120.13035"
          id="text1-1-3-7"><tspan
            sodipodi:role="line"
            style="stroke-width:0.264583"
-           x="99.736801"
-           y="112.21651"
+           x="98.314514"
+           y="120.13035"
            id="tspan3-0">semapv:crossSpeciesCloseMatch</tspan></text>
     </g>
     <g
-       id="g9"
-       transform="translate(66.430908,-32.175126)">
+       id="g8">
       <rect
          style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
          id="rect1-8-4-0"
          width="74.171829"
          height="8.1728315"
-         x="114.45489"
-         y="121.96146" />
+         x="180.88579"
+         y="89.786331" />
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-         x="117.1993"
-         y="127.03317"
+         x="188.3138"
+         y="94.858047"
          id="text1-1-3-6"><tspan
            sodipodi:role="line"
            style="stroke-width:0.264583"
-           x="117.1993"
-           y="127.03317"
+           x="188.3138"
+           y="94.858047"
            id="tspan3-5">semapv:crossSpeciesNarrowMatch</tspan></text>
     </g>
     <g
-       id="g7"
-       transform="translate(-7.6566193,-33.094242)">
+       id="g9">
       <rect
          style="fill:#ffbf37;fill-opacity:1;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
          id="rect1-8-4-8"
          width="68.973877"
          height="8.2010021"
-         x="145.95995"
-         y="134.11821" />
+         x="138.30333"
+         y="101.02397" />
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-         x="147.62639"
-         y="139.20401"
+         x="144.11336"
+         y="106.10977"
          id="text1-1-3-75"><tspan
            sodipodi:role="line"
            style="stroke-width:0.264583"
-           x="147.62639"
-           y="139.20401"
+           x="144.11336"
+           y="106.10977"
            id="tspan3-9">semapv:crossSpeciesBroadMatch</tspan></text>
     </g>
     <path
@@ -433,48 +426,46 @@
        id="path16-06"
        sodipodi:nodetypes="cc" />
     <g
-       id="g3"
-       transform="translate(-53.256406,-9.7843846)">
+       id="g3">
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-         x="93.704597"
-         y="85.031044"
+         x="42.739182"
+         y="75.246658"
          id="text1-1-6"><tspan
            sodipodi:role="line"
            id="tspan1-4-2"
            style="stroke-width:0.264583"
-           x="93.704597"
-           y="85.031044">skos:exactMatch</tspan></text>
+           x="42.739182"
+           y="75.246658">skos:exactMatch</tspan></text>
       <rect
          style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
          id="rect1-7-2"
          width="39.313789"
          height="8.4480276"
-         x="90.506615"
-         y="79.497032" />
+         x="37.25021"
+         y="69.712646" />
     </g>
     <g
-       id="g5"
-       transform="translate(86.472904,-29.098967)">
+       id="g7">
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:3.52777px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
-         x="113.28377"
-         y="104.34563"
+         x="202.43437"
+         y="75.246658"
          id="text1-1-9"><tspan
            sodipodi:role="line"
            id="tspan1-4-9"
            style="stroke-width:0.264583"
-           x="113.28377"
-           y="104.34563">skos:narrowMatch</tspan></text>
+           x="202.43437"
+           y="75.246658">skos:narrowMatch</tspan></text>
       <rect
          style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linejoin:round;stroke-dasharray:none"
          id="rect1-7-93"
          width="39.313789"
          height="8.4480276"
-         x="111.84191"
-         y="98.811615" />
+         x="198.31482"
+         y="69.712646" />
     </g>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#ArrowWide-0)"
