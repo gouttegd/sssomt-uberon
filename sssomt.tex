@@ -62,20 +62,19 @@ ontologies.
 \section{Introduction}
 
 One of the prerequisites for the reuse and renalysis of datasets from
-high-throughput experimental methods --~such as single-cell RNA sequencing
-datasets~-- beyond their lab of origin is the annotation of samples
-and results with standardised terms. That is, we need controlled
-vocabularies to properly record information such as the exact
-techniques used, the organs or tissues from which the experimental
-samples were taken, or the cell types that were identified. Several
-ontologies have been developed for this kind of purpose, such as the
-Experimental Factor Ontology (EFO) to annotate experimental
-methods~\cite{malone2010}, the Drosophila Anatomy Ontology (FBbt) to
-annotate anatomical structures and cell types in
-\species{D.~melanogaster}~\cite{costa2013}, the Worm Anatomy Ontology
-(WBbt) to do the same in \species{C.~elegans}~\cite{lee2003}, etc. Most
-of those ontologies are grouped under the umbrella of the OBO
-Foundry~\cite{jackson2021}.
+high-throughput experimental methods --~such as single-cell RNA
+sequencing datasets~-- beyond their lab of origin is the annotation of
+samples and results with standardised terms. That is, we need controlled
+vocabularies to properly record information such as the exact techniques
+used, the organs or tissues from which the experimental samples were
+taken, or the cell types that were identified. Several ontologies have
+been developed for this kind of purpose, such as the Experimental Factor
+Ontology (EFO) to annotate experimental methods~\cite{malone2010}, the
+Drosophila Anatomy Ontology (FBbt) to annotate anatomical structures and
+cell types in \species{D.~melanogaster}~\cite{costa2013}, the Worm
+Anatomy Ontology (WBbt) to do the same in
+\species{C.~elegans}~\cite{lee2003}, etc. Most of those ontologies are
+grouped under the umbrella of the OBO Foundry~\cite{jackson2021}.
 
 However, comparing datasets across species additionally requires that
 the ontology terms used to annotate the datasets are themselves
@@ -90,21 +89,23 @@ organised in a consistent hierarchy.
 
 \section{The Uberon strategy for a multi-species ontology}
 
-Building a single cross-species anatomy ontology from the ground up, with terms
-suitable for all the model organisms, would be a gigantic task, requiring lots
-of species-specific expertise that would be hard to gather in a single project.
-Instead, a more realistic approach was adopted by the Uberon
-project~\cite{mungall2012a} which, rather than attempting to describe the
-anatomy of every model organism, leverages the existing species-specific
-anatomy ontologies. Uberon aims to provide a ``core'' anatomy ontology that
-describes anatomical structures in a species-neutral way, along with
-``bridges'' that allow to integrate the more precise terms from the
-species-specific ontologies (Figure~\ref{fig:bridges}). The result of merging
-the Uberon core ontology with the species-specific ontologies along with the
-corresponding bridges is a product called \emph{composite-metazoan} (hereafter
-CM), a single, consistent cross-species ontology. The Cell Ontology (CL), an
-ontology of cell types, follows the same approach~\cite{diehl2016}, and is
-automatically included in Uberon's CM product.
+Building a single cross-species anatomy ontology from the ground up,
+with terms suitable for all the model organisms, would be a gigantic
+task, requiring lots of species-specific expertise that would be hard to
+gather in a single project.  Instead, a more practical approach was
+adopted by the Uberon project~\cite{mungall2012a} which, rather than
+attempting to describe the anatomy of every model organism, leverages
+the existing species-specific anatomy ontologies. Uberon aims to provide
+a ``core'' anatomy ontology that describes anatomical structures in a
+species-neutral way, along with ``bridges'' that allow to integrate the
+more precise terms from the species-specific ontologies
+(Figure~\ref{fig:bridges}). The result of merging the Uberon core
+ontology with the species-specific ontologies along with the
+corresponding bridges is a product called \emph{composite-metazoan}
+(hereafter CM), a single, consistent cross-species ontology. The Cell
+Ontology (CL), an ontology of cell types, follows the same
+approach~\cite{diehl2016}, and is automatically included in Uberon's CM
+product.
 
 \begin{figure}
   \centering
@@ -121,7 +122,7 @@ automatically included in Uberon's CM product.
   \label{fig:bridges}
 \end{figure}
 
-To implement its strategy, Uberon maintains a set of cross-ontology
+To implement this strategy, Uberon maintains a set of cross-ontology
 mappings, which are used to determine where the terms from the
 species-specific ontologies should be placed in the overall Uberon
 hierarchy. Across ontologies of the OBO Foundry, the typical method to
@@ -137,73 +138,78 @@ ontologies.
 While simple, the cross-reference method has several limitations. (i) It
 does not allow to record any metadata about the mapping, such as: who
 asserted that the two terms should be mapped? On what basis? When was
-the mapping reviewed? (ii) The method does not allow for any nuance:
+the mapping reviewed?  (ii) The method does not allow for any nuance:
 either two terms are mapped or they are not, without room to express
 more subtle relations. (iii) Cross-references have no clear and
-universally agreed upon meaning. When two terms are mapped, the meaning
-of the mapping is left unspecified, and typically has to be inferred
-from the ontologies that are being mapped (for example, a mapping
-between the species-neutral Uberon and the \species{Drosophila}-specific
-FBbt can be inferred to be a cross-species mapping). This is made worse
-by the fact that cross-references in OBO ontologies are used for many
-different things beyond just mappings; for example, when used to
-annotate a term definition, they typically attribute a source for the
-definition, akin to a citation in an academic paper.
+universally agreed upon meaning. When two terms are mapped to each
+other, the meaning of the mapping is left unspecified, and typically has
+to be inferred from the ontologies that are being mapped (for example, a
+mapping between the species-neutral Uberon and the
+\species{Drosophila}-specific FBbt can be inferred to be a cross-species
+mapping). This is made worse by the fact that cross-references in OBO
+ontologies are used for many different things beyond just mappings; for
+example, when used to annotate a term definition, cross-references
+typically attribute a source for the definition, akin to a citation in
+an academic paper.
 
 \section{New approach to cross-ontology mappings}
 
 We have devised a new approach to maintain and use cross-ontology
-mappings in Uberon, centered around three axes: (i) the use of a new
+mappings in Uberon, centred around three axes: (i) the use of a new
 format to represent the mappings, (ii) the creation of dedicated mapping
 relations, and (iii) the development of new tools to manipulate the
 mappings and, in particular, derive OWL axioms from them.
 
 \subsection{The SSSOM standard}
 
-The Simple Standard for Sharing Ontological Mappings (SSSOM) is a recently
-devised standard specifically intended to facilitate the exchange of semantic
-mappings~\cite{matentzoglu2022b}. It allows treating mappings as first-class
-data entities and to attach to them a range of metadata such as provenance and
-licensing information. The standard defines a common data model to represent
-mappings as well as two distinct serialisation formats to store and transport
-instances of the model: a JSON-based format and a TSV-based format. The TSV
-format has been specifically designed to be easily manipulatable both by
-standard spreadsheet software (for editing by curators) and by common science
-libraries and tools (for exploitation by data scientists and engineers). At
-least two independent implementations of the standard are available: SSSOM-Py
-and SSSOM-Java, for the Python and Java programming languages, respectively. In
-addition, several ontology-related tools have started to add direct support for
-the format, such as the Ontology Access Kit~\cite{mungall2023} and the Ontology
-Development Kit~\cite{matentzoglu2022a}. The community resource Biomappings
-also provides its mappings in SSSOM, among other formats~\cite{hoyt2023}.
+The Simple Standard for Sharing Ontological Mappings (SSSOM) is a
+recently devised standard specifically intended to facilitate the
+exchange of semantic mappings~\cite{matentzoglu2022b}. It allows
+mappings to be treated as first-class data entities and to attach to
+them a range of metadata such as provenance and licensing information.
+The standard defines a common data model to represent mappings as well
+as two distinct serialisation formats to store and transport instances
+of the model: a JSON-based format and a TSV-based format. The TSV format
+has been specifically designed to be easily manipulatable both by
+standard spreadsheet software (for editing by curators) and by common
+science libraries and tools (for use by data scientists and engineers).
+At least two independent implementations of the standard are available:
+SSSOM-Py and SSSOM-Java, for the Python and Java programming languages,
+respectively. In addition, several ontology-related tools have started
+to add direct support for the format, such as the Ontology Access
+Kit~\cite{mungall2023} and the Ontology Development
+Kit~\cite{matentzoglu2022a}. The community resource Biomappings also
+provides its mappings in SSSOM, among other formats~\cite{hoyt2023}.
 
 \subsection{New mapping relations for cross-species mappings}
 
-One of the benefits brought by the SSSOM standard is the possibility to use
-highly specific mapping predicates to express precisely what is the intended
-meaning of a mapping. While many mapping sets don’t actually need this, and can
-use common mapping predicates such as those from the SKOS
+One of the benefits brought by the SSSOM standard is the possibility to
+use highly specific mapping predicates to express precisely the intended
+meaning of a mapping. While many mapping sets don’t actually need this,
+and can use common mapping predicates such as those from the SKOS
 vocabulary~\cite{bechhofer2009} (\property{skos:exactMatch},
-\property{skos:narrowMatch}, etc.), cross-species mappings are an example of an
-application where the common predicates are not satisfying. For example, let us
-consider a mapping between the FBbt term for neuron (\curie{FBbt:00005106},
-representing a neuron in a fruit fly) and the corresponding term in the Cell
-Ontology (\curie{CL:0000540}, representing a neuron in any species): clearly it
-would not be correct to state that a fly neuron is the same concept as a neuron
-in any other species --~the two terms are not interchangeable, so
-\property{skos:exactMatch} is not a suitable mapping predicate.  A slightly
-more correct predicate could be \property{skos:narrowMatch}, because is it true
-that a fly neuron is a narrower concept than a species-neutral neuron; but a
-sensory neuron (\curie{CL:0000101}) is also a narrower concept than a generic
-neuron, yet the relation between \term{sensory neuron} and \term{neuron} is of
-a different nature than the relation between \term{fly neuron} and
-\term{(species-neutral) neuron}.
+\property{skos:narrowMatch}, etc.), cross-species mappings are an
+example of an application where the common predicates are not
+sufficient. For example, let us consider a mapping between the FBbt term
+for neuron (\curie{FBbt:00005106}, representing a neuron in a fruit fly)
+and the corresponding term in the Cell Ontology (\curie{CL:0000540},
+representing a neuron in any species): clearly it would not be correct
+to state that a fly neuron is the same concept as a neuron in any other
+species --~the two terms are not interchangeable, so
+\property{skos:exactMatch} is not a suitable mapping predicate.  A
+slightly more correct predicate could be \property{skos:narrowMatch},
+because is it true that a fly neuron is a narrower concept than a
+species-neutral neuron; but a sensory neuron (\curie{CL:0000101}) is
+also a narrower concept than a generic neuron, yet the relation between
+\term{sensory neuron} and \term{neuron} is of a different nature than
+the relation between \term{fly neuron} and \term{(species-neutral)
+neuron}.
 
 Overall we believe that cross-species mappings are \emph{sui generis}
 mappings and that they warrant the use of dedicated mapping predicates
 to reflect that fact. We therefore expanded the SEMAPV vocabulary,
 specifically established for use with SSSOM~\cite{matentzoglu2022}, with
-four new mapping predicates (Figure~\ref{fig:relations}) that mirrors
+four new mapping predicates (Figure~\ref{fig:relations}) that mirror
 existing SKOS predicates but are specifically intended for cases where
 the subject and object of a mapping belong to different taxonomic
 groupings.
@@ -219,20 +225,20 @@ groupings.
 
 \subsection{Deriving OWL bridges from SSSOM}
 
-Even with fast SSSOM adoption, it is likely that many tools will remain
-unable to directly exploit SSSOM sets in the foreseeable future.
-Therefore, when mappings are stored in the SSSOM format, we need to be
-able to convert them into OWL axioms that can be used by any ontology
-manipulation tool. To that effect, we have developed a plugin for ROBOT,
-the standard tool used to manipulate OBO ontologies~\cite{jackson2019}.
-The plugin is built on top of the Java implementation of the SSSOM
-standard and provides a \emph{sssom:inject} command that takes a SSSOM
-mapping set as input, derives OWL axioms from the mappings, and injects
-them into an ontology.
+Even as SSSOM adoption spreads rapidly, it is likely that many tools
+will remain unable to directly exploit SSSOM sets in the foreseeable
+future.  Therefore, when mappings are stored in the SSSOM format, we
+need to be able to convert them into OWL axioms that can be used by any
+ontology manipulation tool. To that effect, we have developed a SSSOM
+plugin for ROBOT, the standard tool used to manipulate OBO
+ontologies~\cite{jackson2019}.  The plugin is built on top of the Java
+implementation of the SSSOM standard and provides a \emph{sssom:inject}
+command that takes a SSSOM mapping set as input, derives OWL axioms from
+the mappings, and injects them into an ontology.
 
 Rather than hardcoding the logic for deriving the axioms --~which would
 have been efficient but would have made the logic harder to modify and
-re-use~--, we designed a small domain-specific language (DSL), named
+re-use~-- we designed a small domain-specific language (DSL), named
 SSSOM/T-OWL (``SSSOM/Transform-to-OWL''), that allows users to describe
 which mappings in a set should be transformed into OWL axioms and what
 kind of axioms should be produced.
@@ -268,32 +274,34 @@ the mapping.
   \end{tabular}
 \end{table}
 
-Filters allow to compare the value of any of the SSSOM metadata slots
-with a target value and to discard any mapping with a different value. A
-basic form of wildcard matching is supported, where a filter can select
-mappings with a value that starts with the same prefix as the target
-value. Individual filters can be combined to select mappings based on
-more than just one metadata slot; they can also be negated, so that a
-filter that would select a given set of mappings would, after negation,
-discard that set and instead select the complementary set of mappings.
+Filters allow the value of any of the SSSOM metadata slots to be
+compared with a target value and to discard any mapping with a different
+value. A basic form of wildcard matching is supported, where a filter
+can select mappings with a value that starts with the same prefix as the
+target value. Individual filters can be combined to select mappings
+based on more than just one metadata slot; they can also be negated, so
+that a filter that would select a given set of mappings would, after
+negation, instead select the complementary set of mappings.
 
-Preprocessors allow modifying a mapping before it is used by subsequent
-rules. Possible modifications include inverting a mapping (the subject
-becomes the object and vice-versa) and changing some of the mapping's
-metadata. A preprocessor can also be used to completely remove a mapping
-from the set, so that no further rule will be applied to this mapping.
+Preprocessors allow a mapping to be modified before it is used by
+subsequent rules. Possible modifications include inverting a mapping
+(the subject becomes the object and vice-versa) and changing some of the
+mapping's metadata. A preprocessor can also be used to completely remove
+a mapping from the set, so that no further rule will be applied to this
+mapping.
 
-Finally, the generators take the selected mapping and turn it into an axiom.
-The most important generator function is \function{create\_axiom}, which can
-produce an arbitrary axiom described by an expression in Manchester
-syntax~\cite{patel-schneider2012}. Other generators allow to annotate classes
-of the ontology with any of the available mappings metadata.
+Finally, the generators take the selected mapping and turn it into an
+axiom.  The most important generator function is
+\function{create\_axiom}, which can produce an arbitrary axiom described
+by an expression in Manchester syntax~\cite{patel-schneider2012}. Other
+generators allow classes of the ontology to be annotated with any of the
+available mappings metadata.
 
-Of note, the current implementation of the SSSOM/T-OWL language clearly
+Of note, the current implementation of the SSSOM/T-OWL language cleanly
 separates the OWL generators from the filters and the preprocessing
-functions. This makes it easy to create other domain-specific languages
+functions.  This makes it easy to create other domain-specific languages
 similar to SSSOM/T-OWL, using the same overall syntax, the same filters
-and the same preprocessors, but that generate other objects than OWL
+and the same preprocessors, but that generate objects other than OWL
 axioms.
 
 \section{Application of the approach to the Uberon pipeline}
@@ -338,15 +346,15 @@ ontologies beyond FBbt are still currently maintained as
 cross-references either within Uberon or within the species-specific
 ontologies. They are extracted and converted to SSSOM dynamically as
 part of Uberon's release pipeline. In a second phase, which we have not
-started yet, we will migrate those mappings to SSSOM definitely, as was
-done for the FBbt mappings.
+started yet, we will migrate those mappings fully to SSSOM, as was done
+for the FBbt mappings.
 
 \subsection{Applying the transformation rules}
 
 Regardless of their origin, all mappings between Uberon, CL, and the
-species-specific ontologies are then processed by a single large
-SSSOM/T-OWL ruleset that contains all the required logic to generate the
-bridging axioms. A typical rule in this ruleset is the following:
+species-specific ontologies are processed by a single large SSSOM/T-OWL
+ruleset that contains all the required logic to generate the bridging
+axioms. A typical rule in this ruleset is the following:
 
 \begin{lstlisting}
 (subject==UBERON:* || subject==CL:*) && object==FBbt:*
@@ -363,18 +371,18 @@ to the intersection of the Uberon (or CL) term and an existential
 restriction over \curie{BFO:0000050} (\term{part of}) and
 \curie{NCBITaxon:7227} (\term{Drosophila melanogaster}).
 
-All axioms produced by the SSSOM/T-OWL ruleset are dispatched into one
-different bridge file for each foreign ontology.
+All axioms produced by the SSSOM/T-OWL ruleset are saved into a separate
+bridge file for each foreign ontology.
 
 \subsection{Building the composite-metazoan ontology}
 
 Once the bridge files have been generated, an intermediate ontology
-(\emph{collected-metazoan}) is built by merging together: Uberon itself,
+(\emph{collected-metazoan}) is built by merging together Uberon itself,
 the Cell Ontology, all the species-specific ontologies, and their
 corresponding bridges. Finally, \emph{composite-metazoan} itself is
 derived from this intermediate product by applying some custom logic
 (implemented in a small, dedicated ROBOT plugin) to ``prune'' redundant
-terms and replace them by equivalent anonymous class expressions.
+terms and replace them with equivalent anonymous class expressions.
 
 The details of this last operation are beyond the scope of this paper,
 but as an example, let us consider the FBbt term \term{ovary}
@@ -388,7 +396,7 @@ FBbt:00004865 EquivalentTo: UBERON:0000992 and
 \end{lstlisting}
 
 The ``pruning'' operation leading to \emph{composite-metazoan} consists
-in replacing all occurrences of \curie{FBbt:00004865} by the anonymous
+of replacing all occurrences of \curie{FBbt:00004865} by the anonymous
 expression it is equivalent to. So the following axiom, which states
 that the \term{oviduct} (\curie{FBbt:00004911}) is \term{continuous
 with} (\curie{RO:0002150}) the fly ovary:
@@ -406,17 +414,21 @@ FBbt:00004911 SubClassOf: RO:0002150 some (UBERON:0000992 and
 
 \section{Conclusion}
 
-While full transition to SSSOM is not achieved yet, we now have the
-needed infrastructure in place to complete this migration, and we have a
-more robust and more flexible pipeline for creating the bridges needed
-for \emph{composite-metazoan}. The logic for deriving the bridges is
-expressed using a simple DSL that most editors should be able to master
-quickly, should the need arise to modify said logic (for example to add
-a new bridge). While the precise SSSOM/T-OWL rules we use are obviously
-specific to the needs of Uberon, we believe the general approach of
-maintaining mappings as SSSOM sets and transforming them into OWL
-bridges using a simple DSL could be re-used by any project that requires
-integrating several ontologies together.
+To construct a consistent and maintainable cross-species anatomy
+ontology, we have updated the integration mechanism between Uberon, CL,
+and the species-centric ontologies by using SSSOM to manage the mappings
+betweeen the ontologies. While full transition to SSSOM is not yet
+complete, we now have the needed infrastructure in place to complete
+this migration, and we have a more robust and more flexible pipeline for
+creating the bridges needed for \emph{composite-metazoan}. The logic for
+deriving the bridges is expressed using a simple DSL (SSSOM/T-OWL) that
+most ontology editors should be able to master quickly, should the need
+arise to modify said logic (for example to add a new bridge). While the
+precise SSSOM/T-OWL rules we use are obviously specific to the needs of
+Uberon, we believe the general approach of maintaining mappings as SSSOM
+sets and transforming them into OWL bridges using a simple DSL could be
+used by any project that requires integrating several ontologies
+together.
 
 \begin{acknowledgments}
 This work was supported by grant BB/T014008 from the UK Biotechnology
