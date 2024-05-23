@@ -9,3 +9,4 @@ figs/*.png
 *.out
 *.pdf
 *.xmpdata
+*.xmpi
