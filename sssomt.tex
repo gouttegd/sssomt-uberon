@@ -140,17 +140,18 @@ does not allow to record any metadata about the mapping, such as: who
 asserted that the two terms should be mapped? On what basis? When was
 the mapping reviewed?  (ii) The method does not allow for any nuance:
 either two terms are mapped or they are not, without room to express
-more subtle relations. (iii) Cross-references have no clear and
-universally agreed upon meaning. When two terms are mapped to each
-other, the meaning of the mapping is left unspecified, and typically has
-to be inferred from the ontologies that are being mapped (for example, a
-mapping between the species-neutral Uberon and the
-\species{Drosophila}-specific FBbt can be inferred to be a cross-species
-mapping). This is made worse by the fact that cross-references in OBO
-ontologies are used for many different things beyond just mappings; for
-example, when used to annotate a term definition, cross-references
-typically attribute a source for the definition, akin to a citation in
-an academic paper.
+more subtle relations. (iii) Cross-references are embedded within the
+ontology itself, and are therefore not easily reusable by third parties.
+(iv) Cross-references have no clear and universally agreed upon meaning.
+When two terms are mapped to each other, the meaning of the mapping is
+left unspecified, and typically has to be inferred from the ontologies
+that are being mapped (for example, a mapping between the
+species-neutral Uberon and the \species{Drosophila}-specific FBbt can be
+inferred to be a cross-species mapping). This is made worse by the fact
+that cross-references in OBO ontologies are used for many different
+things beyond just mappings; for example, when used to annotate a term
+definition, cross-references typically attribute a source for the
+definition, akin to a citation in an academic paper.
 
 \section{New approach to cross-ontology mappings}
 
@@ -414,20 +415,30 @@ FBbt:00004911 SubClassOf: RO:0002150 some (UBERON:0000992 and
 
 \section{Conclusion}
 
-To construct a consistent and maintainable cross-species anatomy
-ontology, we have updated the integration mechanism between Uberon, CL,
-and the species-centric ontologies by using SSSOM to manage the mappings
-betweeen the ontologies. While full transition to SSSOM is not yet
-complete, we now have the needed infrastructure in place to complete
-this migration, and we have a more robust and more flexible pipeline for
-creating the bridges needed for \emph{composite-metazoan}. The logic for
-deriving the bridges is expressed using a simple DSL (SSSOM/T-OWL) that
-most ontology editors should be able to master quickly, should the need
-arise to modify said logic (for example to add a new bridge). While the
-precise SSSOM/T-OWL rules we use are obviously specific to the needs of
-Uberon, we believe the general approach of maintaining mappings as SSSOM
-sets and transforming them into OWL bridges using a simple DSL could be
-used by any project that requires integrating several ontologies
+In this project, we have (i) expanded the SEMAPV vocabulary so that
+cross-species mappings can be specifically represented in SSSOM; (ii)
+introduced a domain-specific language (SSSOM/T-OWL) to allow converting
+SSSOM mappings into arbitrary OWL axioms; (iii) implemented said
+language in a new ROBOT plugin to inject SSSOM-derived axioms into a OWL
+ontology; (iv) used those new tools to update the integration mechanism
+between Uberon, CL, and the species-centric ontologies, with an approach
+centered on the use of SSSOM, rather than cross-references, to manage
+the mappings between the ontologies.
+
+As a result, cross-species mappings across anatomy ontologies are now
+available as a \emph{bona fide} release artefact of Uberon, provided as
+a distinct file in a known location in a standard format, thereby
+greatly facilitating the reuse of said mappings by any interested third
+party. The logic for deriving the bridge files (needed to correctly
+merge Uberon and the species-specific ontologies), now expressed in the
+SSSOM/T-OWL language, is itself consequently more easily maintainable
+and reusable.
+
+While several aspects of this project (most notably the precise
+SSSOM/T-OWL rules we use) are specific to the needs of Uberon, we
+believe the general approach of maintaining mappings as SSSOM sets and
+transforming them into OWL bridges using a simple DSL could be
+generalised to any project that requires integrating several ontologies
 together.
 
 \begin{acknowledgments}
