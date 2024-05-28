@@ -146,7 +146,7 @@
 \section{Current system}
 
 \begin{frame}
-  \frametitle{Current solution: cross-references}
+  \frametitle{Maintaining mappings as cross-references}
 
   \begin{block}{}\ttfamily
 [Term]
@@ -161,6 +161,13 @@ is\_a: UBERON:0007100 ! primary circulatory organ
 
 xref: FBbt:00003154
   \end{block}
+
+  Limitations:
+  \begin{itemize}
+    \item Overloading of the \emph{oboInOwl:hasDbXref} annotation
+    \item No metadata
+    \item Mappings are embedded within the ontology and must be extracted
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -179,37 +186,60 @@ xref: FBbt:00003154
       \end{tikzpicture}
     \end{column}
     \begin{column}{.68\textwidth}
-      \begin{block}{Bridge file}\ttfamily
+      \begin{block}{uberon-bridge-to-fbbt.obo}\ttfamily
 [Term]
 
 id: FBbt:00003154
-
-property\_value: IAO:0000589 "heart (drosophila)" xsd:string
 
 intersection\_of: UBERON:0015230
 
 intersection\_of: part\_of NCBITaxon:7227
       \end{block}
+
+      Can be used to integrate FBbt into Uberon
     \end{column}
   \end{columns}
+
+  \medskip
+  Limitations:
+  \begin{itemize}
+    \item Highly Uberon-specific code -- cannot be reused outside of Uberon
+    \item Dependent on the OBO format
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Limitations of the current system}
+  \frametitle{Integration pipeline}
 
-  Limitations of cross-references to represent mappings
-  \begin{itemize}
-    \item Overloading of the \emph{oboInOwl:hasDbXref} annotation
-    \item No metadata
-    \item Mappings are embedded within the ontology and must be extracted
-  \end{itemize}
-
-  \bigskip
-  Limitations of the bridging pipeline
-  \begin{itemize}
-    \item Highly Uberon-specific -- cannot be reused outside of Uberon
-    \item Dependent on the OBO format
-  \end{itemize}
+  \begin{columns}
+    \begin{column}{.44\textwidth}
+      \begin{tikzpicture}[node distance=.5cm]
+        \node [Entity] (uberon) {Uberon};
+        \node [Process,below right=of uberon] (script) {Custom script};
+        \node [Entity,above right=of script,align=left] (ssao) {Taxon-specific\\
+                                                                ontologies};
+        \node [Entity,below=of script] (cob) {Bridge files};
+        \node [Process,below=of cob] (merge) {OWL merge};
+        \node [Entity,below=of merge] (cm) {Multi-species ontology};
+        \draw [->] (uberon.east) -| (script.north) (script.south) -- (cob.north);
+        \draw [->] (cob) -- (merge) (merge) -- (cm);
+        \draw [->] (uberon.south) |- (merge.west);
+        \draw [->] (ssao.south) |- (merge.east);
+      \end{tikzpicture}
+    \end{column}
+    \begin{column}{.55\textwidth}
+      Limitations:
+      \begin{itemize}
+        \item Lack of flexibility
+          \begin{itemize}
+            \item Cannot integrate foreign mappings
+            \item Cannot generate a single bridge file
+          \end{itemize}
+        \item Mappings not available independently
+        \item Not generalizable to other ontologies
+      \end{itemize}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \section{New approach}
@@ -218,9 +248,10 @@ intersection\_of: part\_of NCBITaxon:7227
   \frametitle{Principles}
 
   \begin{enumerate}
-    \item Clear separation between cross-ontology \emph{mappings} (COM) and cross-ontology \emph{bridges} (COB)
+    \item Clear separation between
       \begin{itemize}
-        \item A COB is merely the OWL materialisation of a COM
+        \item cross-ontology \emph{mappings} (COM)
+        \item cross-ontology \emph{bridges} (COB)
       \end{itemize}
     \item Represent COM using a standard format intended for that purpose
       \begin{itemize}
@@ -349,16 +380,17 @@ robot sssom:inject -i input.owl --sssom mappings.sssom.tsv --ruleset bridge.rule
 \end{frame}
 
 \begin{frame}
-  \frametitle{Integrating the species-specific ontologies}
+  \frametitle{New SSSOM-based integration pipeline}
 
   \begin{center}
     \begin{tikzpicture}[node distance=.5cm]
       \node [Entity] (uberon) {Uberon};
       \node [Entity,right=of uberon] (com) {Mapping sets};
-      \node [Entity,right=of com] (ssao) {Taxon-specific ontologies};
+      \node [Entity,right=of com,align=left] (ssao) {Taxon-specific\\
+                                                     ontologies};
       \node [Process,below=of com] (sssomt) {SSSOM/T-OWL};
       \node [Entity,below=of sssomt] (cob) {Bridge files};
-      \node [Process,below=of cob] (merge) {OWL Merge};
+      \node [Process,below=of cob] (merge) {OWL merge};
       \node [Entity,below=of merge] (cm) {Multi-species ontology};
       \draw [->] (com) -- (sssomt) (sssomt) -- (cob);
       \draw [->] (cob) -- (merge) (merge) -- (cm);
@@ -371,7 +403,7 @@ robot sssom:inject -i input.owl --sssom mappings.sssom.tsv --ruleset bridge.rule
 \section{Conclusion}
 
 \begin{frame}
-  \frametitle{Outcome}
+  \frametitle{Benefits of the new approach}
 
   \begin{block}{Cross-ontology mappings as first-class artefacts}
     \begin{itemize}
