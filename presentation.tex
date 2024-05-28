@@ -1,0 +1,410 @@
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{tikz}
+
+\setmainlanguage{english}
+\usetheme{cambridge}
+
+\graphicspath{{imgs/}{svgs/}}
+
+% TikZ libraries and styles
+\usetikzlibrary{positioning,shapes.geometric,graphs,graphdrawing,quotes,fit}
+\usegdlibrary{layered,trees}
+\colorlet{GenericItem}{yellow!20!white}
+\colorlet{GenericHighlight}{red!20!white}
+\tikzset{Term/.style={draw,fill=yellow!20!white,font=\tiny\bfseries}}
+\tikzset{Relation/.style={draw=blue!40!white,thick,arrows=<-}}
+\tikzset{RelationLabel/.style={shape=circle,fill=white,draw=black,thin,font=\tiny\bfseries,inner sep=1pt}}
+\tikzset{File/.style={draw,fill=yellow!20!white,font=\tiny\ttfamily}}
+\tikzset{Entity/.style={draw,fill=yellow!20!white,font=\scriptsize}}
+\tikzset{Process/.style={draw,shape=ellipse,fill=blue!20!white,font=\scriptsize}}
+
+\title{(Re-)bridging the anatomy ontologies with SSSOM}
+
+\author{Damien~Goutte-Gattat\inst{1}}
+\institute{\inst{1}FlyBase group, Department of Physiology, Development and Neuroscience}
+\date{International Conference on Biomedical Ontologies 2024, July 2024}
+
+\hypersetup{pdfpagemode=UseNone,
+  pdftitle={},
+  pdfauthor={Damien Goutte-Gattat}}
+\AtBeginSection{
+  \begin{frame}{Outline}{}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}
+  \frametitle{An approach to a multi-species anatomy ontology}
+
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      \begin{tikzpicture}[nodes={shape=circle,draw,fill=GenericItem}]
+        \node (core) {Uberon};
+        \node (fbbt) at (150:2cm) {FBbt};
+        \node (zfa)  at (90:2cm)  {ZFA};
+        \node (xao)  at (30:2cm)  {XAO};
+        \node (ma)   at (210:2cm) {MA};
+        \node (wbbt) at (270:2cm) {WBbt};
+        \node (tx1) at  (310:2cm) {...};
+        \node (tx2) at  (330:2cm) {...};
+        \node (tx3) at  (350:2cm) {...};
+        \draw (core) -- (fbbt) (core) -- (zfa)  (core) -- (xao)
+              (core) -- (ma)   (core) -- (wbbt) (core) -- (tx1)
+              (core) -- (tx2)  (core) -- (tx3);
+      \end{tikzpicture}
+    \end{column}
+    \begin{column}{.45\textwidth}
+      Strategy:
+      \begin{itemize}
+        \item Provide a taxon-neutral core framework
+        \item Integrate existing taxon-specific ontologies
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: integration with FBbt}
+
+  \only<1>{
+    \begin{columns}[t]
+      \begin{column}{.45\textwidth}
+        Uberon hierarchy
+        \begin{tikzpicture}
+          \graph[layered layout,orient=down,nodes={Term},edge quotes mid,edges={Relation,nodes={RelationLabel}}] {
+            anatomical entity <-
+            anatomical structure <-
+            circulatory organ <- {
+              primary circulatory organ <- { heart, dorsal vessel heart },
+              accessory circulatory organ <- lymph heart
+            };
+          };
+        \end{tikzpicture}
+      \end{column}
+      \begin{column}{.45\textwidth}
+        FBbt hierarchy
+        \begin{tikzpicture}
+          \graph[layered layout,orient=down,nodes={Term},edge quotes mid,edges={Relation,nodes={RelationLabel}}] {
+            anatomical entity <-
+            anatomical structure <-
+            heart <-["P"] {
+              aortic funnel, heart chamber, dorsal diaphragm
+            };
+          };
+        \end{tikzpicture}
+      \end{column}
+    \end{columns}
+  }
+  \only<2>{
+    \begin{columns}
+      \begin{column}{.3\textwidth}
+        Integrated hierarchy
+      \end{column}
+      \begin{column}{.6\textwidth}
+        \begin{tikzpicture}
+          \graph[layered layout,orient=down,nodes={Term},edge quotes mid,edges={Relation,nodes={RelationLabel}}] {
+            anatomical entity <-
+            anatomical structure <-
+            circulatory organ <- {
+              primary circulatory organ <- {
+                heart,
+                dorsal vessel heart <- "heart (drosophila)" <-["P"] {
+                  aortic funnel, heart chamber, dorsal diaphragm
+                }
+              },
+              accessory circulatory organ <- lymph heart
+            };
+          };
+        \end{tikzpicture}
+      \end{column}
+    \end{columns}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Integration requires cross-ontology mappings}
+
+  \begin{block}{}
+    Integrating the taxon-specific ontologies with the Uberon core framework
+    requires to know where taxon-specific terms should be ``plugged'' in the
+    core framework.
+
+    E.g., we need to know that FBbt's \emph{heart} must be attached to Uberon's
+    \emph{dorsal vessel heart}.
+  \end{block}
+\end{frame}
+
+\section{Current system}
+
+\begin{frame}
+  \frametitle{Current solution: cross-references}
+
+  \begin{block}{}\ttfamily
+[Term]
+
+id: UBERON:0015230
+
+name: dorsal vessel heart
+
+def: "The caudal, pulsatile region of the dorsal vessel of the arthropod circulatory system."
+
+is\_a: UBERON:0007100 ! primary circulatory organ
+
+xref: FBbt:00003154
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{From cross-references to bridge files}
+
+  \begin{columns}
+    \begin{column}{.3\textwidth}
+      \begin{tikzpicture}
+        \node [File] (uberon) at (0,0)     {uberon.obo};
+        \node [File] (script) at (0,-1)    {make-bridge-ontology-from-xrefs.pl};
+        \node [File] (bridge) at (0,-2)    {uberon-bridge-to-fbbt.obo};
+        \node [File]          at (0, -2.5) {uberon-bridge-to-wbbt.obo};
+        \node [File]          at (0, -3)   {uberon-bridge-to-ma.obo};
+        \node [File]          at (0, -3.5) {uberon-bridge-to-....obo}; 
+        \draw[->] (uberon) -- (script) (script) -- (bridge);
+      \end{tikzpicture}
+    \end{column}
+    \begin{column}{.68\textwidth}
+      \begin{block}{Bridge file}\ttfamily
+[Term]
+
+id: FBbt:00003154
+
+property\_value: IAO:0000589 "heart (drosophila)" xsd:string
+
+intersection\_of: UBERON:0015230
+
+intersection\_of: part\_of NCBITaxon:7227
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Limitations of the current system}
+
+  Limitations of cross-references to represent mappings
+  \begin{itemize}
+    \item Overloading of the \emph{oboInOwl:hasDbXref} annotation
+    \item No metadata
+    \item Mappings are embedded within the ontology and must be extracted
+  \end{itemize}
+
+  \bigskip
+  Limitations of the bridging pipeline
+  \begin{itemize}
+    \item Highly Uberon-specific -- cannot be reused outside of Uberon
+    \item Dependent on the OBO format
+  \end{itemize}
+\end{frame}
+
+\section{New approach}
+
+\begin{frame}
+  \frametitle{Principles}
+
+  \begin{enumerate}
+    \item Clear separation between cross-ontology \emph{mappings} (COM) and cross-ontology \emph{bridges} (COB)
+      \begin{itemize}
+        \item A COB is merely the OWL materialisation of a COM
+      \end{itemize}
+    \item Represent COM using a standard format intended for that purpose
+      \begin{itemize}
+        \item allowing for mapping-specific metadata
+        \item allowing for meaningful mapping predicates
+      \end{itemize}
+    \item Make it easy to derive COB from COM
+      \begin{itemize}
+        \item without requiring Uberon-specific tooling
+      \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The SSSOM standard}
+
+  ``Simple Standard for Sharing Ontological Mappings''
+  \begin{itemize}
+    \item A data model to represent semantic mappings and associated metadata
+    \item A simple TSV-based format to store and exchange them
+  \end{itemize}
+
+  \begin{block}{SSSOM/TSV format}\tiny\ttfamily
+    \begin{tabular}{lllll}
+      \hline
+      subject\_id   & subject\_label                & predicate\_id                 & object\_id      & mapping\_justification\\
+      \hline
+      FBbt:00000001 & organism                      & semapv:crossSpeciesExactMatch & UBERON:0000468  & semapv:ManualMappingCuration\\
+      FBbt:00000002 & tagma                         & semapv:crossSpeciesExactMatch & UBERON:6000002  & semapv:ManualMappingCuration\\
+      ...           & ...                           & ...                           & ...             & ...\\
+      FBbt:00003154 & heart                         & semapv:crossSpeciesExactMatch & UBERON:0015230  & semapv:ManualMappingCuration\\
+      ...           & ...                           &...                           & ...             & ...\\
+      \hline
+    \end{tabular}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{New mapping predicates for cross-species mappings}
+
+  Additions to the \emph{Semantic Mapping Vocabulary} (SEMAPV)
+  \begin{center}
+    \begin{tikzpicture}
+      \graph[tree layout,nodes={Term},edges={Relation}] {
+        "skos:mappingRelation" <- {
+          "semapv:isomorphicMatch" <- {
+            "skos:exactMatch",
+            "semapv:crossSpeciesExactMatch" [fill=GenericHighlight]
+          },
+          "semapv:nonIsomorphicMatch" <- {
+            "skos:broadMatch" <- "semapv:crossSpeciesBroadMatch" [fill=GenericHighlight],
+            "skos:narrowMatch" <- "semapv:crossSpeciesNarrowMatch" [fill=GenericHighlight]
+          }
+        };
+      };
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{From SSSOM sets to bridge files: SSSOM/T-OWL}
+
+  A domain-specific language to transform SSSOM mappings into OWL axioms
+
+  \only<1>{
+    \begin{block}{Model of a mapping processing rule}
+      \begin{center}
+        \begin{tikzpicture}
+          \node [text width=5cm,fill=GenericItem,draw] (filter) at (0,0)
+                {\textbf{Filter}\\
+                 Mapping $\rightarrow$ boolean\\
+                 Decide whether the rule applies to a mapping};
+          \node [text width=5cm,fill=GenericItem,draw] (preprocessor) at (6,1)
+                {\textbf{Preprocessor}\\
+                 Mapping $\rightarrow$ mapping\\
+                 Modify a mapping on the fly};
+          \node [text width=5cm,fill=GenericItem,draw] (generator) at (6,-1)
+                {\textbf{Generator}\\
+                 Mapping $\rightarrow$ OWL axiom\\
+                 Derive an axiom from a mapping};
+          \draw[->] (filter) -- (preprocessor);
+          \draw[->] (filter) -- (generator);
+        \end{tikzpicture}
+      \end{center}
+    \end{block}
+  }
+  \only<2>{
+    \begin{block}{Inverting a mapping}\ttfamily\scriptsize
+subject==UBERON:* -> invert();
+    \end{block}
+
+    \begin{block}{Generating a simple axiom}\ttfamily\scriptsize
+predicate==skos:broadMatch -> create\_axiom("\%subject\_id SubClassOf: \%object\_id");
+    \end{block}
+
+    \begin{block}{Generating a more complex axiom}\ttfamily\scriptsize
+subject==FBbt:*\\
+\hspace{1cm} \&\& predicate==semapv:crossSpeciesExactMatch\\
+\hspace{1cm} \&\& (mapping\_justification==semapv:ManualMappingCuration || confidence>=0.8)\\
+->  create\_axiom("\%subject\_id EquivalentTo: \%object\_id and\\
+\hspace{2cm} (BFO:0000050 some NCBITaxon:7227"));
+    \end{block}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Implementation in ROBOT commands}
+
+  \begin{block}{sssom:xref-extract command}
+    Convert existing mappings represented as cross-references into a SSSOM set
+
+    \medskip
+    {\ttfamily\scriptsize
+robot sssom:xref-extract -i input.owl --mapping-file output.sssom.tsv
+    }
+  \end{block}
+
+  \begin{block}{sssom:inject command}
+    Apply SSSOM/T-OWL rules to a mapping set and inject the resulting axioms into an ontology
+
+    \medskip
+    {\ttfamily\scriptsize
+robot sssom:inject -i input.owl --sssom mappings.sssom.tsv --ruleset bridge.rules
+    }
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Integrating the species-specific ontologies}
+
+  \begin{center}
+    \begin{tikzpicture}[node distance=.5cm]
+      \node [Entity] (uberon) {Uberon};
+      \node [Entity,right=of uberon] (com) {Mapping sets};
+      \node [Entity,right=of com] (ssao) {Taxon-specific ontologies};
+      \node [Process,below=of com] (sssomt) {SSSOM/T-OWL};
+      \node [Entity,below=of sssomt] (cob) {Bridge files};
+      \node [Process,below=of cob] (merge) {OWL Merge};
+      \node [Entity,below=of merge] (cm) {Multi-species ontology};
+      \draw [->] (com) -- (sssomt) (sssomt) -- (cob);
+      \draw [->] (cob) -- (merge) (merge) -- (cm);
+      \draw [->] (uberon.south) |- (merge.west);
+      \draw [->] (ssao.south) |- (merge.east);
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}
+  \frametitle{Outcome}
+
+  \begin{block}{Cross-ontology mappings as first-class artefacts}
+    \begin{itemize}
+      \item With their own metadata
+      \item Can be maintained separately
+      \item Available as a separate release product in a standard format
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Generic framework for SSSOM-based integration of multiple ontologies}
+    \begin{itemize}
+      \item SSSOM/T-OWL is completely independent of Uberon
+      \item Only the ruleset is specific
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Example: FBbt/Uberon/CL integration test}
+
+  A single ROBOT command to merge FBbt with Uberon, CL, and the mappings-derived
+  bridging axioms, and check for possible inconsistencies that would reveal
+  incorrect mappings:
+
+  \begin{block}{}
+\begin{verbatim}
+robot merge -i fbbt.owl -i uberon.owl -i cl.owl \
+      sssom:inject --sssom mappings.sssom.tsv   \
+                   --ruleset bridging.rules     \
+      reason -r ELK
+\end{verbatim}
+  \end{block}
+\end{frame}
+
+\end{document}
+
