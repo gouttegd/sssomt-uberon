@@ -1,6 +1,6 @@
 TEXFILES = presentation.tex
 
-all: screen.pdf handout.pdf clean
+all: screen.pdf handout.pdf notes.pdf clean
 
 %.pdf: %.tex $(TEXFILES)
 	latexmk -lualatex $<
