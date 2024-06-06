@@ -182,7 +182,8 @@
   existing species-specific ontologies without having to duplicate their
   efforts.
 
-  This talk is about how this integration process works.}
+  This talk is about how this integration process works, and how we recently
+  overhauled it to make it easier to maintain, more robust, and FAIRer.}
 
 \end{frame}
 
@@ -210,116 +211,10 @@
 
 \end{frame}
 
-\section{Current system}
+\section{Limits of the previous system}
 
 \begin{frame}
-  \frametitle{Maintaining mappings as cross-references}
-
-  \begin{block}{}\ttfamily
-[Term]
-
-id: UBERON:0015230
-
-name: dorsal vessel heart
-
-def: "The caudal, pulsatile region of the dorsal vessel of the arthropod circulatory system."
-
-is\_a: UBERON:0007100 ! primary circulatory organ
-
-xref: FBbt:00003154
-  \end{block}
-
-  Limitations:
-  \begin{itemize}
-    \item Overloading of the \emph{oboInOwl:hasDbXref} annotation
-    \item No metadata
-    \item Mappings are embedded within the ontology and must be extracted
-  \end{itemize}
-
-  \note{In the current system, mappings are represented and maintained as
-  \emph{cross-references}, that is, as a \emph{oboInOwl:hasDbXref} annotation
-  that is carried by the taxon-neutral term in Uberon and that points to the
-  taxon-specific term in another ontology -- as shown here, where Uberon's
-  ``dorsal vessel heart'' term carries a ``xref'' to FBbt:00003154, which is
-  FBbt's term for the fly heart that we have seen before.
-
-  That's a pretty simple way of representing mappings, but it has several
-  drawbacks.
-
-  First, the \emph{oboInOwl:hasDbXref} annotation has been used for a lot of
-  things since its introduction, and no longer has a clear and unambiguous
-  meaning -- what it means depends on where it is used.
-
-  Second, all this representation allows us to say is that there is a mapping,
-  but we can't know anything else about said mapping. Why does that mapping
-  exist? Who asserted it? When? On what basis? This is simply not recorded.
-
-  Third, the mappings are not available separately from the entire ontology.
-  This makes reusing those mappings more difficult than it should be
-  (difficult to Find, Access and Reuse).}
-
-\end{frame}
-
-\begin{frame}
-  \frametitle{From cross-references to bridge files}
-
-  \begin{columns}
-    \begin{column}{.3\textwidth}
-      \begin{tikzpicture}
-        \node [File] (uberon) at (0,0)     {uberon.obo};
-        \node [File] (script) at (0,-1)    {make-bridge-ontology-from-xrefs.pl};
-        \node [File] (bridge) at (0,-2)    {uberon-bridge-to-fbbt.obo};
-        \node [File]          at (0, -2.5) {uberon-bridge-to-wbbt.obo};
-        \node [File]          at (0, -3)   {uberon-bridge-to-ma.obo};
-        \node [File]          at (0, -3.5) {uberon-bridge-to-....obo}; 
-        \draw[->] (uberon) -- (script) (script) -- (bridge);
-      \end{tikzpicture}
-    \end{column}
-    \begin{column}{.68\textwidth}
-      \begin{block}{uberon-bridge-to-fbbt.obo}\ttfamily
-[Term]
-
-id: FBbt:00003154
-
-intersection\_of: UBERON:0015230
-
-intersection\_of: part\_of NCBITaxon:7227
-      \end{block}
-
-      Can be used to integrate FBbt into Uberon
-    \end{column}
-  \end{columns}
-
-  \medskip
-  Limitations:
-  \begin{itemize}
-    \item Highly Uberon-specific code -- cannot be reused outside of Uberon
-    \item Dependent on the OBO format
-  \end{itemize}
-
-  \note{Whenever we make a new Uberon release, the mappings (stored as
-  cross-references within Uberon) are extracted by a specialised Perl script
-  to produce a set of \emph{bridge files} (one for each species-specific
-  ontology). The bridge files are a OBO materialisation of the mappings; they
-  contain minimalist frames that serve to rattach a species-specific term to a
-  core Uberon term, as in this example, which states that FBbt:00003154 (the
-  fly heart) is equivalent to a Uberon's ``dorsal vessel heart'' that is part
-  of the \emph{Drosophila melanogaster} taxon.
-
-  The main problem with this derivation is that the aforementioned script is
-  highly specific to Uberon. Most of its behaviours are hard-coded, and the
-  script is virtually impossible to re-use outside of Uberon. This means,
-  among other things, that third-party projects that might need those bridges,
-  for one reason or another, are entirely dependent on Uberon to produce them.
-  One example of such a project is Ubergraph.
-
-  Another limitation is that the script only works with the OBO format, both
-  for its input and its output.}
-
-\end{frame}
-
-\begin{frame}
-  \frametitle{Integration pipeline}
+  \frametitle{Overview of the previous integration system}
 
   \begin{columns}
     \begin{column}{.44\textwidth}
@@ -337,86 +232,93 @@ intersection\_of: part\_of NCBITaxon:7227
         \draw [->] (ssao.south) |- (merge.east);
       \end{tikzpicture}
     \end{column}
-    \begin{column}{.55\textwidth}
-      Limitations:
-      \begin{itemize}
-        \item Lack of flexibility
-          \begin{itemize}
-            \item Cannot integrate foreign mappings
-            \item Cannot generate a single bridge file
-          \end{itemize}
-        \item Mappings not available independently
-        \item Not generalizable to other ontologies
-      \end{itemize}
+    \begin{column}{.53\textwidth}
+      \begin{block}{Mappings maintained as xrefs}\scriptsize\ttfamily
+[Term]
+
+id: UBERON:0015230
+
+name: dorsal vessel heart
+
+is\_a: UBERON:0007100 ! primary circulatory organ
+
+xref: FBbt:00003154
+      \end{block}
+  
+      \begin{block}{Xrefs transformed to bridge files}\scriptsize\ttfamily
+[Term]
+
+id: FBbt:00003154
+
+intersection\_of: UBERON:0015230
+
+intersection\_of: part\_of NCBITaxon:7227
+      \end{block}
     \end{column}
   \end{columns}
 
-  \note{Finally, here is an outline of the entire integration process, what
-  happens when we do a Uberon release. From the main Uberon source file, we
-  create the bridge files using the aforementioned script, and then we merge
-  together: (1) Uberon itself, (2) the bridge files, and (3) the
-  species-specific ontologies, to produce the integrated, multi-species
-  ontology.
+  \begin{itemize}
+    \item Mappings not available to third parties
+    \item Pipeline highly Uberon-specific, inflexible and not reusable
+  \end{itemize}
 
-  While the process looks superficially simple (though it is, in fact, quite
-  complex, it's just that most of the complexity is hidden behind that
-  script), it is also severely limited.
+  \note{Mappings are represented and maintained as \emph{cross-references}
+  that are carried by the taxon-neutral terms in Uberon and that point to the
+  taxon-specific terms in other ontologies -- as shown here, where Uberon's
+  ``dorsal vessel heart'' term carries a ``xref'' to FBbt:00003154, which is
+  FBbt's term for the fly heart.
 
-  It is inflexible, in that the only possible source of mappings to generate
-  the bridge files are the xrefs in Uberon itself -- we cannot integrate
-  mappings coming from another source (which means we cannot delegate the
-  maintenance of the mappings to the species-specific ontologies). Also, we
-  cannot generate a single bridge file on-demand -- the script can only be
-  used to generate all the bridge files in one step. It does not allow to
-  publish the mappings themselves.
+  When building Uberon, those cross-references are extracted by a custom
+  script that turns them into \emph{bridge files}, which contains OWL
+  materialisations of the mappings, in the form of equivalence axioms (for
+  example here, an axiom stating the FBbt's ``heart'' is equivalent to an
+  Uberon's ``dorsal vessel heart'' that is part of the \emph{Drosophila
+  melanogaster} taxon).
 
-  It cannot be applied to other ontologies. There might be other projects that
-  need to integrate several ontologies together, using mappings to connect
-  terms across ontologies, but those projects cannot benefit from the work
-  done in Uberon.}
+  This system has severe limitations, one of the most important being that the
+  mappings are directly embedded within the ontology itself and are not
+  independently available. In FAIR terms, this makes the mappings much more
+  difficult to find, access and reuse than we would like.
+
+  Furthermore, the custom script that generates the bridge files from the
+  cross-references is highly specific to Uberon; its behaviour are completely
+  hardcoded to fit Uberon's use case, so the integration logic cannot possibly
+  be reused by other projects.}
 
 \end{frame}
 
-\section{New approach}
-
 \begin{frame}
-  \frametitle{Principles}
+  \frametitle{Goals for a new approach}
 
   \begin{enumerate}
-    \item Clear separation between
+    \item Cross-ontology mappings (COM) as first-class entities
       \begin{itemize}
-        \item cross-ontology \emph{mappings} (COM)
-        \item cross-ontology \emph{bridges} (COB)
+        \item available independently of the ontology itself
       \end{itemize}
-    \item Represent COM using a standard format intended for that purpose
+    \item Represent mappings using a standard format intended for that purpose
       \begin{itemize}
         \item allowing for mapping-specific metadata
         \item allowing for meaningful mapping predicates
       \end{itemize}
-    \item Make it easy to derive COB from COM
+    \item Make it easy to derive OWL bridge files from mappings
       \begin{itemize}
         \item without requiring Uberon-specific tooling
       \end{itemize}
   \end{enumerate}
 
-  \note{Here are the key principles that dictated the design of the new
-  approach.
+  \note{In response to the limits of the previous system, here are the key
+  principles that dictated the design of the new approach.
 
-  First, we want a clear separation between the \emph{mappings} and the
-  \emph{bridges} that are derived from the mappings. In our current system,
-  the mappings only exist as annotations within the ontology, and are not
-  really treated as ``first-class objects''. In our new system, we want to
-  focus on the mappings rather than the bridges, because the mappings are the
-  actual informations that we are maintaining -- the bridges are merely a
-  derivatiom from them. In particular, we want to be able to publish the
-  mappings themselves, independently of the bridges.
+  First, we want to treat mappings as ``first-class entities'', on the same
+  level as the terms of the ontology. Among other things, this means that they
+  must be publicly available on their own, without requiring people interested
+  in them to forcefully extract them from the ontology.
 
   Second, we want to store the mappings using a format that is both standard
   and specifically intended for representing mappings. That format should,
-  among other things, make it possible to store mapping-specific metadata (who
-  asserted the mapping, etc.), make it possible to give precise meaning to a
-  mapping (not just saying that two terms are mapped, but what is the nature
-  of the link between them).
+  among other things, make it possible to store mapping-specific metadata, and
+  to give precise meaning to a mapping (not just saying that two terms are
+  mapped, but what is the nature of the link between them).
 
   Lastly, we want a bridge generation process that is much simpler than the
   current one, and that is not tied to Uberon in any way, so that it can be
@@ -424,6 +326,8 @@ intersection\_of: part\_of NCBITaxon:7227
   ontologies together.}
 
 \end{frame}
+
+\section{Implementation}
 
 \begin{frame}
   \frametitle{The SSSOM standard}
@@ -662,7 +566,7 @@ robot sssom:inject -i input.owl --sssom mappings.sssom.tsv --ruleset bridge.rule
     \end{tikzpicture}
   \end{center}
 
-  \note{This leads us to our now, SSSOM-based integration pipeline for Uberon,
+  \note{This leads us to our new, SSSOM-based integration pipeline for Uberon,
   which now has three distinct inputs: (1) Uberon itself, (2) the mappings
   between Uberon and the taxon-specific ontologies, and (3) the taxon-specific
   ontologies.
