@@ -85,12 +85,11 @@
   But to enable \emph{cross-species} curation and analysis of data (especially
   high-throughput data, such as scRNAseq), we need ideally a single,
   multi-species ontology that covers all our model organisms. For the past 12
-  years or so, this has been provided by Uberon, the Uber Anatomy Ontology.
+  years or so, this has been the goal of Uberon, the Uber Anatomy Ontology.
 
-  Rather than duplicating the work already done by pre-existing,
-  species-specific ontologies, Uberon's strategy is to provide a taxon-neutral
-  core framework, describing common anatomical structures in broadly generic
-  terms, and to plug the species-specific ontologies into that core.}
+  Uberon's strategy to achieve that goal is to provide a taxon-neutral core
+  framework, describing common anatomical structures in broadly generic terms,
+  and to plug the species-specific ontologies into that core.}
 
 \end{frame}
 
@@ -205,9 +204,7 @@
   framework. For example, knowing that FBbt's ``heart'' is the fly-specific
   term for what Uberon calls the ``dorsal vessel heart''.
 
-  This is the role of cross-ontology \emph{mappings} -- basically, a mapping
-  is a statement that one term from an ontology A is ``mapped'', or
-  ``related'', to another term in an ontology B.}
+  This is the role of cross-ontology \emph{mappings}.}
 
 \end{frame}
 
@@ -282,8 +279,8 @@ intersection\_of: part\_of NCBITaxon:7227
 
   Furthermore, the custom script that generates the bridge files from the
   cross-references is highly specific to Uberon; its behaviour are completely
-  hardcoded to fit Uberon's use case, so the integration logic cannot possibly
-  be reused by other projects.}
+  hardcoded to fit Uberon's use case, so the integration logic is difficult to
+  modify and almost impossible to reuse by other projects.}
 
 \end{frame}
 
@@ -310,15 +307,16 @@ intersection\_of: part\_of NCBITaxon:7227
   principles that dictated the design of the new approach.
 
   First, we want to treat mappings as ``first-class entities'', on the same
-  level as the terms of the ontology. Among other things, this means that they
-  must be publicly available on their own, without requiring people interested
-  in them to forcefully extract them from the ontology.
+  level as the terms of the ontology. This notably means that they must be
+  publicly available on their own, without requiring people interested in them
+  to forcefully extract them from the ontology.
 
   Second, we want to store the mappings using a format that is both standard
-  and specifically intended for representing mappings. That format should,
-  among other things, make it possible to store mapping-specific metadata, and
-  to give precise meaning to a mapping (not just saying that two terms are
-  mapped, but what is the nature of the link between them).
+  and specifically intended for representing mappings. That format should make
+  it possible to store mapping-specific metadata, and to give precise meaning
+  to a mapping (not just saying that two terms are mapped, but: who asserted
+  that those two terms should be mapped? When? On what basis? And what does
+  the mapping actually means?).
 
   Lastly, we want a bridge generation process that is much simpler than the
   current one, and that is not tied to Uberon in any way, so that it can be
@@ -395,27 +393,25 @@ intersection\_of: part\_of NCBITaxon:7227
   \end{center}
 
   \note{One of the benefits of the SSSOM standard is that it does not simply
-  allow to say that two terms are mapped, or somehow related, to each other.
-  As we've seen in the last example, it also allows to specify an explicit
-  mapping predicate, so as to give a precise meaning to each mapping. It is
-  then possible to distinguish, for example between mappings of terms that
-  represent exactly the same concept in two different vocabularies, and
-  mappings of terms that represent \emph{similar}, but not exactly identical,
-  concepts.
+  allow to say that two terms are mapped, to each other.  As we've seen in the
+  last example, it also allows to specify an explicit mapping predicate, so as
+  to give a precise meaning to each mapping. It is then possible to
+  distinguish, for example between mappings of terms that represent exactly
+  the same concept in two different vocabularies, and mappings of terms that
+  represent \emph{similar}, but not exactly identical, concepts.
 
-  In fact, as part of the efforts around the SSSOM standard, we have compiled
-  a dedicated vocabulary, the \emph{Semantic Mapping Vocabulary}, to host,
-  among other things, various mapping predicates that can be used to describe
-  mappings. In that vocabulary, as part of this project, we have added a
-  handful of predicates to specifically represent \emph{cross-species
-  mappings}.
+  The authors of the SSSOM standard have compiled a dedicated vocabulary, the
+  \emph{Semantic Mapping Vocabulary}, to host, among other things, various
+  mapping predicates that can be used to describe mappings. In that
+  vocabulary, as part of this project, we have added a handful of predicates
+  to specifically represent \emph{cross-species mappings}.
 
-  For example, \emph{crossSpeciesExactMatch}, which is intended for mappings
-  between terms that represent the same concept, modulo a taxonomic
-  restriction. We can use that predicate to explicitly say that the FBbt term
-  for the fly heart represents exactly the same concept as the Uberon term for
-  dorsal vessel heart, \emph{except} for the fact that the former is specific
-  to flies.}
+  The most important being \emph{crossSpeciesExactMatch}, which is intended
+  for mappings between terms that represent the same concept, modulo a
+  taxonomic restriction. We can use that predicate to explicitly say that the
+  FBbt term for the fly heart represents exactly the same concept as the
+  Uberon term for dorsal vessel heart, \emph{except} for the fact that the
+  former is specific to flies.}
 
 \end{frame}
 
@@ -466,7 +462,7 @@ subject==FBbt:*\\
 
   \note<1>{Now that we can store mappings in a dedicated format, we need a way
   to use those mappings when we want to integrate several ontologies together.
-  And, as stated in our goals, we want to do that in a way that is, as much as
+  And, as per our third goal, we want to do that in a way that is, as much as
   possible, not specific to Uberon, but reusable by other projects as well.
 
   For that, we have designed, and we propose, a small domain-specific language
@@ -509,6 +505,95 @@ subject==FBbt:*\\
 \end{frame}
 
 \begin{frame}
+  \frametitle{New SSSOM-based integration pipeline}
+
+  \begin{center}
+    \begin{tikzpicture}[node distance=.5cm]
+      \node [Entity] (uberon) {Uberon};
+      \node [Entity,right=of uberon] (com) {Mapping sets};
+      \node [Entity,right=of com,align=left] (ssao) {Taxon-specific\\
+                                                     ontologies};
+      \node [Process,below=of com] (sssomt) {SSSOM/T-OWL};
+      \node [Entity,below=of sssomt] (cob) {Bridge files};
+      \node [Process,below=of cob] (merge) {OWL merge};
+      \node [Entity,below=of merge] (cm) {Multi-species ontology};
+      \draw [->] (com) -- (sssomt) (sssomt) -- (cob);
+      \draw [->] (cob) -- (merge) (merge) -- (cm);
+      \draw [->] (uberon.south) |- (merge.west);
+      \draw [->] (ssao.south) |- (merge.east);
+    \end{tikzpicture}
+  \end{center}
+
+  \note{This leads us to our new, SSSOM-based integration pipeline for Uberon.
+  That pipeline has three distinct inputs: (1) Uberon itself, (2) the mappings
+  between Uberon and the taxon-specific ontologies (which are no longer
+  embedded within the ontology itself), and (3) the taxon-specific ontologies.
+
+  The mappings are transformed at build-time into OWL bridge files using a
+  custom SSSOM/T-OWL ruleset, that contains rules similar to the one we have
+  seen earlier: a rule that says that cross-species mappings between FBbt and
+  Uberon are to be transformed into equivalence axioms with a taxonomic
+  restriction to the \emph{Drosophila melanogaster} taxon, a rule that says
+  that cross-species mappings between XAO and Uberon are to be transformed
+  into equivalence axioms with a taxonomic restriction to the \emph{Xenopus}
+  taxon, etc.
+
+  That step is performed by a dedicated ROBOT plugins that implement the
+  SSSOM/T-OWL language.
+
+  After this step, we have only OWL files, which can all be merged using a
+  standard ROBOT merge operation, producing the multi-species ontology that we
+  want.}
+
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}
+  \frametitle{Benefits of the new approach}
+
+  \begin{block}{Cross-ontology mappings as first-class artefacts}
+    \begin{itemize}
+      \item With their own metadata
+      \item Can be maintained separately
+      \item Available as a separate release product in a standard format
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Generic framework for SSSOM-based integration of multiple ontologies}
+    \begin{itemize}
+      \item SSSOM/T-OWL is completely independent of Uberon
+      \item Only the ruleset is specific
+    \end{itemize}
+  \end{block}
+
+  \note{For Uberon itself, the main benefit of the new approach is that we now
+  have a pipeline that is both more flexible --~for example, easy to modify,
+  as all the logic is in the SSSOM/T-OWL ruleset~-- and more robust.
+
+  For downstream users of Uberon, the mappings between Uberon and the
+  taxon-specific ontologies are now first-class artefacts. They can have their
+  own metadata, allowing for traceability and accountability of each
+  individual mapping statement. They can be maintained separately from the
+  Uberon ontology itself, for example to delegate them to the taxon-specific
+  ontologies themselves (something we have already started doing for the
+  mappings with FBbt, which are now maintained by FBbt rather than by Uberon).
+  They are available as a distinct release product, which is findable on its
+  own, in a format that is still relatively new but that we hope will become
+  the standard format for semantic mappings.
+
+  And for everyone else, we now have a generic framework to integrate multiple
+  ontologies with SSSOM-maintained mappings. The SSSOM/T-OWL language, and its
+  implementation in the SSSOM ROBOT plugin, has no ties whatsoever to Uberon
+  and can be reused by any project. Only the SSSOM/T-OWL rules that we use are
+  tailored to the needs of Uberon.}
+
+\end{frame}
+
+\appendix
+\section{\appendixname}
+
+\begin{frame}
   \frametitle{Implementation in ROBOT commands}
 
   \begin{block}{sssom:xref-extract command}
@@ -543,89 +628,6 @@ robot sssom:inject -i input.owl --sssom mappings.sssom.tsv --ruleset bridge.rule
   domain-specific language. That command takes a mapping set and a set of
   SSSOM/T-OWL rules as input, and will inject into the current ontology the
   axioms produced by applying the SSSOM/T-OWL rules to the mapping set.}
-
-\end{frame}
-
-\begin{frame}
-  \frametitle{New SSSOM-based integration pipeline}
-
-  \begin{center}
-    \begin{tikzpicture}[node distance=.5cm]
-      \node [Entity] (uberon) {Uberon};
-      \node [Entity,right=of uberon] (com) {Mapping sets};
-      \node [Entity,right=of com,align=left] (ssao) {Taxon-specific\\
-                                                     ontologies};
-      \node [Process,below=of com] (sssomt) {SSSOM/T-OWL};
-      \node [Entity,below=of sssomt] (cob) {Bridge files};
-      \node [Process,below=of cob] (merge) {OWL merge};
-      \node [Entity,below=of merge] (cm) {Multi-species ontology};
-      \draw [->] (com) -- (sssomt) (sssomt) -- (cob);
-      \draw [->] (cob) -- (merge) (merge) -- (cm);
-      \draw [->] (uberon.south) |- (merge.west);
-      \draw [->] (ssao.south) |- (merge.east);
-    \end{tikzpicture}
-  \end{center}
-
-  \note{This leads us to our new, SSSOM-based integration pipeline for Uberon,
-  which now has three distinct inputs: (1) Uberon itself, (2) the mappings
-  between Uberon and the taxon-specific ontologies, and (3) the taxon-specific
-  ontologies.
-
-  The mappings are transformed at build-time into OWL bridge files using a
-  custom SSSOM/T-OWL ruleset, that contains rules similar to the one we have
-  seen earlier: a rule that says that cross-species mappings between FBbt and
-  Uberon are to be transformed into equivalence axioms with a taxonomic
-  restriction to the \emph{Drosophila melanogaster} taxon, a rule that says
-  that cross-species mappings between XAO and Uberon are to be transformed
-  into equivalence axioms with a taxonomic restriction to the \emph{Xenopus}
-  taxon, etc.
-
-  After this step, we have only OWL files, which can all be merged using a
-  standard ROBOT merge operation, producing the multi-species ontology that we
-  want.}
-
-\end{frame}
-
-\section{Conclusion}
-
-\begin{frame}
-  \frametitle{Benefits of the new approach}
-
-  \begin{block}{Cross-ontology mappings as first-class artefacts}
-    \begin{itemize}
-      \item With their own metadata
-      \item Can be maintained separately
-      \item Available as a separate release product in a standard format
-    \end{itemize}
-  \end{block}
-
-  \begin{block}{Generic framework for SSSOM-based integration of multiple ontologies}
-    \begin{itemize}
-      \item SSSOM/T-OWL is completely independent of Uberon
-      \item Only the ruleset is specific
-    \end{itemize}
-  \end{block}
-
-  \note{For Uberon itself, the main benefit of the new approach is that we now
-  have a pipeline that is both more flexible --~for example, it allows
-  combining mapping sets from different sources as input~-- and more robust.
-
-  For downstream users of Uberon, the mappings between Uberon and the
-  taxon-specific ontologies are now first-class artefacts. They can have their
-  own metadata, allowing for traceability and accountability of each
-  individual mapping statement. They can be maintained separately from the
-  Uberon ontology itself, for example to delegate them to the taxon-specific
-  ontologies themselves (something we have already started doing for the
-  mappings with FBbt, which are now maintained by FBbt rather than by Uberon).
-  They are available as a distinct release product, which is findable on its
-  own, in a format that is still relatively new but that we hope will become
-  the standard format for semantic mappings.
-
-  And for everyone else, we now have a generic framework to integrate multiple
-  ontologies with SSSOM-maintained mappings. The SSSOM/T-OWL language, and its
-  implementation in the SSSOM ROBOT plugin, has no ties whatsoever to Uberon
-  and can be reused by any project. Only the SSSOM/T-OWL rules that we use are
-  tailored to the needs of Uberon.}
 
 \end{frame}
 
