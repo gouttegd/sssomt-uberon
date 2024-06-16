@@ -4,12 +4,12 @@ PNGS = figs/bridges.png \
 
 INKSCAPE = inkscape
 
-sssomt.pdf: sssomt.tex sssomt.bib $(PNGS)
-	latexmk -lualatex sssomt
+paper.pdf: paper.tex sssomt.bib $(PNGS)
+	latexmk -lualatex paper
 
 %.png: %.svg
 	$(INKSCAPE) --export-type=png --export-filename=$@ $<
 
 .PHONY: clean
 clean:
-	latexmk -c sssomt
+	latexmk -c paper
