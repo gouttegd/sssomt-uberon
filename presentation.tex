@@ -105,7 +105,7 @@
             anatomical entity <-
             anatomical structure <-
             circulatory organ <- {
-              primary circulatory organ <- { heart, dorsal vessel heart },
+              primary circulatory organ <- { heart, dorsal vessel heart[fill=GenericHighlight] },
               accessory circulatory organ <- lymph heart
             };
           };
@@ -117,7 +117,7 @@
           \graph[layered layout,orient=down,nodes={Term},edge quotes mid,edges={Relation,nodes={RelationLabel}}] {
             anatomical entity <-
             anatomical structure <-
-            heart <-["P"] {
+            heart[fill=GenericHighlight] <-["P"] {
               aortic funnel, heart chamber, dorsal diaphragm
             };
           };
@@ -138,7 +138,8 @@
             circulatory organ <- {
               primary circulatory organ <- {
                 heart,
-                dorsal vessel heart <- "heart (drosophila)" <-["P"] {
+                dorsal vessel heart[fill=GenericHighlight]
+                    <- "heart (drosophila)"[fill=GenericHighlight] <-["P"] {
                   aortic funnel, heart chamber, dorsal diaphragm
                 }
               },
@@ -339,18 +340,23 @@ intersection\_of: part\_of NCBITaxon:7227
   \begin{block}{SSSOM/TSV format}\tiny\ttfamily
     \begin{tabular}{lllll}
       \hline
-      subject\_id   & subject\_label                & predicate\_id                 & object\_id      & mapping\_justification\\
+      subject\_id   & predicate\_id                 & object\_id      & mapping\_justification        & mapping\_date\\
       \hline
-      FBbt:00000001 & organism                      & semapv:crossSpeciesExactMatch & UBERON:0000468  & semapv:ManualMappingCuration\\
-      FBbt:00000002 & tagma                         & semapv:crossSpeciesExactMatch & UBERON:6000002  & semapv:ManualMappingCuration\\
-      ...           & ...                           & ...                           & ...             & ...\\
-      FBbt:00003154 & heart                         & semapv:crossSpeciesExactMatch & UBERON:0015230  & semapv:ManualMappingCuration\\
-      ...           & ...                           &...                           & ...             & ...\\
+      FBbt:00000001 & semapv:crossSpeciesExactMatch & UBERON:0000468  & semapv:ManualMappingCuration  & 2024-06-01\\
+      FBbt:00000002 & semapv:crossSpeciesExactMatch & UBERON:6000002  & semapv:ManualMappingCuration  & 2024-06-01\\
+      ...           & ...                           & ...             & ...                           & ...\\
+      \textcolor<2>{red}{FBbt:00003154} & \textcolor<2>{red}{semapv:crossSpeciesExactMatch} & \textcolor<2>{red}{UBERON:0015230}  & \textcolor<3>{red}{semapv:ManualMappingCuration}  & \textcolor<3>{red}{2024-06-01}\\
+      ...           & ...                           & ...             & ...                           & ...\\
       \hline
     \end{tabular}
   \end{block}
 
-  \note{Over the past three years, independently of Uberon, a new standard has
+  \begin{overlayarea}{\textwidth}{1cm}
+    \only<2>{Mapping proper: subject -- predicate -- object triple}
+    \only<3>{Mapping metadata}
+  \end{overlayarea}
+
+  \note<1>{Over the past three years, independently of Uberon, a new standard has
   been devised, specifically for the purpose of representing semantic
   mappings: the Simple Standard for Sharing Ontological Mappings.
 
@@ -365,9 +371,8 @@ intersection\_of: part\_of NCBITaxon:7227
   possible.
 
   You see here an very basic example of what a mapping set in SSSOM/TSV format
-  looks like: one mapping per line, each mapping consisting, as its core, of a
-  subject, predicate, object triple. In this example, for simplicitly we only
-  show one bit of metadata (the mapping justification).}
+  looks like: one mapping per line, each mapping consisting, at its core, of a
+  subject, predicate, object triple, associated with several metadata.}
 
 \end{frame}
 
@@ -420,47 +425,28 @@ intersection\_of: part\_of NCBITaxon:7227
 
   A domain-specific language to transform SSSOM mappings into OWL axioms
 
-  \only<1>{
-    \begin{block}{Model of a mapping processing rule}
-      \begin{center}
-        \begin{tikzpicture}
-          \node [text width=5cm,fill=GenericItem,draw] (filter) at (0,0)
-                {\textbf{Filter}\\
-                 Mapping $\rightarrow$ boolean\\
-                 Decide whether the rule applies to a mapping};
-          \node [text width=5cm,fill=GenericItem,draw] (preprocessor) at (6,1)
-                {\textbf{Preprocessor}\\
-                 Mapping $\rightarrow$ mapping\\
-                 Modify a mapping on the fly};
-          \node [text width=5cm,fill=GenericItem,draw] (generator) at (6,-1)
-                {\textbf{Generator}\\
-                 Mapping $\rightarrow$ OWL axiom\\
-                 Derive an axiom from a mapping};
-          \draw[->] (filter) -- (preprocessor);
-          \draw[->] (filter) -- (generator);
-        \end{tikzpicture}
-      \end{center}
-    \end{block}
-  }
-  \only<2>{
-    \begin{block}{Inverting a mapping}\ttfamily\scriptsize
-subject==UBERON:* -> invert();
-    \end{block}
+  \begin{block}{Model of a mapping processing rule}
+    \begin{center}
+      \begin{tikzpicture}
+        \node [text width=5cm,fill=GenericItem,draw] (filter) at (0,0)
+              {\textbf{Filter}\\
+               Mapping $\rightarrow$ boolean\\
+               Decide whether the rule applies to a mapping};
+        \node [text width=5cm,fill=GenericItem,draw] (preprocessor) at (6,1)
+              {\textbf{Preprocessor}\\
+               Mapping $\rightarrow$ mapping\\
+               Modify a mapping on the fly};
+        \node [text width=5cm,fill=GenericItem,draw] (generator) at (6,-1)
+              {\textbf{Generator}\\
+               Mapping $\rightarrow$ OWL axiom\\
+               Derive an axiom from a mapping};
+        \draw[->] (filter) -- (preprocessor);
+        \draw[->] (filter) -- (generator);
+      \end{tikzpicture}
+    \end{center}
+  \end{block}
 
-    \begin{block}{Generating a simple axiom}\ttfamily\scriptsize
-predicate==skos:broadMatch -> create\_axiom("\%subject\_id SubClassOf: \%object\_id");
-    \end{block}
-
-    \begin{block}{Generating a more complex axiom}\ttfamily\scriptsize
-subject==FBbt:*\\
-\hspace{1cm} \&\& predicate==semapv:crossSpeciesExactMatch\\
-\hspace{1cm} \&\& (mapping\_justification==semapv:ManualMappingCuration || confidence>=0.8)\\
-->  create\_axiom("\%subject\_id EquivalentTo: \%object\_id and\\
-\hspace{2cm} (BFO:0000050 some NCBITaxon:7227"));
-    \end{block}
-  }
-
-  \note<1>{Now that we can store mappings in a dedicated format, we need a way
+  \note{Now that we can store mappings in a dedicated format, we need a way
   to use those mappings when we want to integrate several ontologies together.
   And, as per our third goal, we want to do that in a way that is, as much as
   possible, not specific to Uberon, but reusable by other projects as well.
@@ -480,8 +466,53 @@ subject==FBbt:*\\
   Second, either a preprocessor that takes a mapping and returns a modified
   version of that mapping (allowing to modify a mapping on the fly), or a
   generator that takes a mapping and returns an OWL axiom.}
+\end{frame}
 
-  \note<2>{To illustrate, here are some examples of SSSOM/T-OWL rules.
+\begin{frame}
+  \frametitle{From SSSOM sets to bridge files: SSSOM/T-OWL}
+
+  Examples of SSSOM/T-OWL rules
+
+  \begin{overlayarea}{\textwidth}{3cm}
+    \only<1-2>{
+      \begin{block}{Inverting a mapping}\ttfamily\scriptsize
+        \textcolor<1>{red}{subject==UBERON:*} -> \textcolor<2>{red}{invert()};
+      \end{block}
+    }
+    \only<3-4>{
+      \begin{block}{Generating a simple axiom}\ttfamily\scriptsize
+        \textcolor<3>{red}{predicate==skos:broadMatch} -> \textcolor<4>{red}{create\_axiom("\%subject\_id SubClassOf: \%object\_id")};
+      \end{block}
+    }
+    \only<5-10>{
+      \begin{block}{Generating a more complex axiom}\ttfamily\scriptsize
+        \textcolor<5>{red}{subject==FBbt:*}\\
+        \hspace{1cm} \&\& \textcolor<6>{red}{predicate==semapv:crossSpeciesExactMatch}\\
+        \hspace{1cm} \&\& (\textcolor<7>{red}{mapping\_justification==semapv:ManualMappingCuration} \textcolor<8>{red}{||} \textcolor<9>{red}{confidence>=0.8)}\\
+        ->  \textcolor<10>{red}{create\_axiom("\%subject\_id EquivalentTo: \%object\_id and\\
+        \hspace{2cm} (BFO:0000050 some NCBITaxon:7227"))};
+      \end{block}
+    }
+  \end{overlayarea}
+
+  \begin{overlayarea}{\textwidth}{2.5cm}
+    \only<1-2>{\textcolor<1>{red}{Select mappings with a UBERON subject}
+
+    and \textcolor<2>{red}{flip them around the predicate}}
+    \only<3-4>{\textcolor<3>{red}{Select mappings with a \emph{skos:broadMatch} predicate}
+
+    and \textcolor<4>{red}{create a \emph{SubClassOf} axiom}}
+    \only<5-10>{Select mappings
+      \begin{itemize}
+        \item \textcolor<5>{red}{with a FBbt subject}
+        \item \textcolor<6>{red}{with a \emph{semapv:crossSpeciesExactMatch} predicate}
+        \item that have been \textcolor<7>{red}{manually curated} \textcolor<8>{red}{or} have a \textcolor<9>{red}{confidence higher than 80\%}
+      \end{itemize}
+
+      and \textcolor<10>{red}{create an equivalence axiom with a taxonomic restriction}}
+  \end{overlayarea}
+
+  \note<1>{To illustrate, here are some examples of SSSOM/T-OWL rules.
 
   First, a simple rule with a simple filter that selects all mappings where
   the subject is a Uberon term, and apply an inversion preprocessor to them.
@@ -590,10 +621,30 @@ subject==FBbt:*\\
 
 \end{frame}
 
-\appendix
-\section{\appendixname}
-
 \begin{frame}
+  \frametitle{About}
+
+  \begin{block}{Acknowledgements}
+    \begin{itemize}
+      \item Grant BB/T014008 from BBSRC (UK) and NSF/BIO (US)
+      \item Mapping Commons project for the SSSOM standard
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{\includegraphics[scale=.26]{ccbysa}\hspace{.2em}2024 Damien Goutte-Gattat}
+    This work is licensed under the Creative Commons Attributions-ShareAlike
+    4.0 License.
+  \end{block}
+
+  \begin{block}{Contact}
+    \href{mailto:dpg44@cam.ac.uk}{\texttt{dpg44@cam.ac.uk}}
+  \end{block}
+\end{frame}
+
+\appendix
+%\section{\appendixname}
+
+\begin{frame}[noframenumbering]
   \frametitle{Implementation in ROBOT commands}
 
   \begin{block}{sssom:xref-extract command}
@@ -631,7 +682,7 @@ robot sssom:inject -i input.owl --sssom mappings.sssom.tsv --ruleset bridge.rule
 
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}[fragile,noframenumbering]
   \frametitle{Example: FBbt/Uberon/CL integration test}
 
   A single ROBOT command to merge FBbt with Uberon, CL, and the mappings-derived

@@ -2,7 +2,7 @@ TEXFILES = presentation.tex
 
 all: screen.pdf handout.pdf notes.pdf clean
 
-%.pdf: %.tex $(TEXFILES)
+%.pdf: %.tex $(TEXFILES) svgs/ccbysa.png
 	latexmk -lualatex $<
 
 clean:
@@ -10,5 +10,8 @@ clean:
 
 mrproper: clean
 	rm -f {screen,dualscreen,handout,notes}.pdf presentation.tex
+
+%.png: %.svg
+	inkscape --export-type=png --export-filename=$@ $<
 
 .PHONY: clean mrproper
