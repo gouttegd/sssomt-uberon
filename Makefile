@@ -5,7 +5,7 @@ all: paper.pdf presentation clean
 PNGS = svgs/bridges.png \
        svgs/pipeline.png \
        svgs/relations.png \
-       svgs/ccbysa.png
+       svgs/ccby.png
 
 INKSCAPE = inkscape
 
@@ -23,7 +23,7 @@ paper.pdf: paper.tex sssomt.bib $(PNGS)
 
 presentation: screen.pdf handout.pdf notes.pdf
 
-PRESENTATION_SOURCES = presentation.tex revision.tex svgs/ccbysa.png
+PRESENTATION_SOURCES = presentation.tex revision.tex svgs/ccby.png
 
 screen.pdf: screen.tex $(PRESENTATION_SOURCES)
 	latexmk -lualatex screen
