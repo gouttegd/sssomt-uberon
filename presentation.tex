@@ -488,7 +488,9 @@ intersection\_of: part\_of NCBITaxon:7227
       \begin{block}{Generating a more complex axiom}\ttfamily\scriptsize
         \textcolor<5>{red}{subject==FBbt:*}\\
         \hspace{1cm} \&\& \textcolor<6>{red}{predicate==semapv:crossSpeciesExactMatch}\\
-        \hspace{1cm} \&\& (\textcolor<7>{red}{mapping\_justification==semapv:ManualMappingCuration} \textcolor<8>{red}{||} \textcolor<9>{red}{confidence>=0.8)}\\
+        \hspace{1cm} \&\&
+        (\textcolor<7>{red}{mapping\_justification==semapv:ManualMappingCuration}
+        \textcolor<8>{red}{||} \textcolor<9>{red}{confidence>=0.8})\\
         ->  \textcolor<10>{red}{create\_axiom("\%subject\_id EquivalentTo: \%object\_id and\\
         \hspace{2cm} (BFO:0000050 some NCBITaxon:7227"))};
       \end{block}
@@ -631,13 +633,14 @@ intersection\_of: part\_of NCBITaxon:7227
     \end{itemize}
   \end{block}
 
-  \begin{block}{\includegraphics[scale=.26]{ccbysa}\hspace{.2em}2024 Damien Goutte-Gattat}
-    This work is licensed under the Creative Commons Attributions-ShareAlike
-    4.0 License.
+  \begin{block}{\includegraphics[scale=.26]{ccbysa}\hspace{.2em}%
+    2024 Damien Goutte-Gattat \texttt{<dpg44@cam.ac.uk>}}
+    This presentation is released under the Creative Commons
+    Attributions-ShareAlike 4.0 License.
   \end{block}
 
-  \begin{block}{Contact}
-    \href{mailto:dpg44@cam.ac.uk}{\texttt{dpg44@cam.ac.uk}}
+  \begin{block}{Revision}\ttfamily\scriptsize
+    \input{revision.tex}
   \end{block}
 \end{frame}
 

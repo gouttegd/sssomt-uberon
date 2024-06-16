@@ -2,7 +2,7 @@ TEXFILES = presentation.tex
 
 all: screen.pdf handout.pdf notes.pdf clean
 
-%.pdf: %.tex $(TEXFILES) svgs/ccbysa.png
+%.pdf: %.tex $(TEXFILES) svgs/ccbysa.png revision.tex
 	latexmk -lualatex $<
 
 clean:
@@ -13,5 +13,8 @@ mrproper: clean
 
 %.png: %.svg
 	inkscape --export-type=png --export-filename=$@ $<
+
+revision.tex:
+	git show -s --format='%aD %H' > revision.tex
 
 .PHONY: clean mrproper
