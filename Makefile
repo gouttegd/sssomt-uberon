@@ -1,6 +1,6 @@
-PNGS = figs/bridges.png \
-       figs/pipeline.png \
-       figs/relations.png
+PNGS = svgs/bridges.png \
+       svgs/pipeline.png \
+       svgs/relations.png
 
 INKSCAPE = inkscape
 

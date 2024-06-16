@@ -3,6 +3,8 @@
 \usepackage{listings}
 \lstset{breaklines=true}
 
+\graphicspath{{svgs/}}
+
 \def\species#1{\textit{#1}}
 \def\term#1{`#1'}
 \def\property#1{\textit{#1}}
@@ -109,7 +111,7 @@ product.
 
 \begin{figure}
   \centering
-  \includegraphics[width=\linewidth]{figs/bridges}
+  \includegraphics[width=\linewidth]{bridges}
   \caption{Uberon and the Drosophila Anatomy Ontology (FBbt) maintain
   their own hierarchy of terms separately. Simply merging the two
   ontologies together \textbf{(A)} would result in a hierarchy that is
@@ -217,7 +219,7 @@ groupings.
 
 \begin{figure}
   \centering
-  \includegraphics[width=.8\linewidth]{figs/relations}
+  \includegraphics[width=.8\linewidth]{relations}
   \caption{Excerpt of the semantic mapping vocabulary (SEMAPV), with the
   new mapping relations (yellow) introduced to specifically represent
   cross-species mappings.}
@@ -313,7 +315,7 @@ product (Figure~\ref{fig:pipeline}).
 
 \begin{figure}
   \centering
-  \includegraphics[width=.4\linewidth]{figs/pipeline}
+  \includegraphics[width=.4\linewidth]{pipeline}
   \caption{Uberon's new pipeline. A Single SSSOM set, encompassing
   mappings with all target species, is created by extracting
   old-style cross-references from both Uberon and several other
