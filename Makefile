@@ -40,8 +40,17 @@ notes.pdf: notes.tex $(PRESENTATION_SOURCES)
 revision.tex:
 	git show -s --format='%aD %H' > revision.tex
 
+sssomt-uberon.tar.gz: revision.tex
+	dir=$$(basename $$PWD) && \
+	tar czf $@ -C .. \
+		$$dir/{COPYING,Makefile,README.md,sssomt.bib} \
+		$$dir/{handout,notes,screen,presentation,paper,revision}.tex \
+		$$dir/svgs/{bridges,pipeline,relations,ccby}.svg
+
+archive: sssomt-uberon.tar.gz
 
 # Cleanup
+
 .PHONY: clean mrproper
 clean:
 	rm -f {paper,screen,handout,notes}.{abs,aux,bbl,blg,fdb_latexmk,fls,log,nav,out,snm,toc,vrb,xmpdata}

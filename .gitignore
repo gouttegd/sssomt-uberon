@@ -13,6 +13,7 @@ svgs/*.png
 *.pdf
 *.pdf
 *.snm
+*.tar.gz
 *.toc
 *.vrb
 *.xmpdata

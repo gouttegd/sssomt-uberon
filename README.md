@@ -19,7 +19,7 @@ Run `make all` to build the paper and all versions of the presentation.
 Pre-requisites:
 
 * [Inkscape](https://inkscape.org)
-* A TeX distribution (tested with [TexLive 2023](https://tug.org/texlive/)
+* A TeX distribution (tested with [TexLive 2023](https://tug.org/texlive/))
 * The [ceurart](https://github.com/yamadharma/ceurart) package (for the paper)
 * The [cambridge-beamer](https://github.com/rjw57/cambridge-beamer) Beamer
   style (for the presentation)
