@@ -9,7 +9,7 @@ clean:
 	rm -f {screen,dualscreen,handout,notes}.{aux,fdb_latexmk,fls,log,nav,out,snm,toc,vrb}
 
 mrproper: clean
-	rm -f {screen,dualscreen,handout,notes}.pdf presentation.tex
+	rm -f {screen,dualscreen,handout,notes}.pdf
 
 %.png: %.svg
 	inkscape --export-type=png --export-filename=$@ $<
