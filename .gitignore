@@ -1,4 +1,6 @@
+revision.tex
 svgs/*.png
+*.DS_Store
 *.abs
 *.aux
 *.bbl
@@ -6,7 +8,12 @@ svgs/*.png
 *.fdb_latexmk
 *.fls
 *.log
+*.nav
 *.out
 *.pdf
+*.pdf
+*.snm
+*.toc
+*.vrb
 *.xmpdata
 *.xmpi
