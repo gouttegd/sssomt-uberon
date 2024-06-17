@@ -56,4 +56,4 @@ clean:
 	rm -f {paper,screen,handout,notes}.{abs,aux,bbl,blg,fdb_latexmk,fls,log,nav,out,snm,toc,vrb,xmpdata}
 
 mrproper: clean
-	rm -f {paper,screen,handout,notes}.pdf
+	rm -f {paper,screen,handout,notes}.pdf revision.tex
