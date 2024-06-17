@@ -54,12 +54,12 @@
   \begin{columns}
     \begin{column}{.5\textwidth}
       \begin{tikzpicture}[nodes={shape=circle,draw,fill=GenericItem}]
-        \node (core) [alt=<6>{fill=GenericHighlight}{}] {Uberon};
-        \node (fbbt) [alt=<{1,7}>{fill=GenericHighlight}{}] at (150:2cm) {FBbt};
-        \node (zfa)  [alt=<{2,7}>{fill=GenericHighlight}{}] at (90:2cm)  {ZFA};
-        \node (xao)  [alt=<{3,7}>{fill=GenericHighlight}{}] at (30:2cm)  {XAO};
-        \node (ma)   [alt=<{4,7}>{fill=GenericHighlight}{}] at (210:2cm) {MA};
-        \node (wbbt) [alt=<{5,7}>{fill=GenericHighlight}{}] at (270:2cm) {WBbt};
+        \node (core) [alt=<6| handout:0>{fill=GenericHighlight}{}] {Uberon};
+        \node (fbbt) [alt=<{1,7| handout:0}>{fill=GenericHighlight}{}] at (150:2cm) {FBbt};
+        \node (zfa)  [alt=<{2,7| handout:0}>{fill=GenericHighlight}{}] at (90:2cm)  {ZFA};
+        \node (xao)  [alt=<{3,7| handout:0}>{fill=GenericHighlight}{}] at (30:2cm)  {XAO};
+        \node (ma)   [alt=<{4,7| handout:0}>{fill=GenericHighlight}{}] at (210:2cm) {MA};
+        \node (wbbt) [alt=<{5,7| handout:0}>{fill=GenericHighlight}{}] at (270:2cm) {WBbt};
         \node (tx1) at  (310:2cm) {...};
         \node (tx2) at  (330:2cm) {...};
         \node (tx3) at  (350:2cm) {...};
@@ -73,10 +73,10 @@
       \smallskip
       \begin{overlayarea}{\textwidth}{1cm}\color{red}
         \only<1>{\emph{Drosophila} Anatomy Ontology}
-        \only<2>{Zebrafish Anatomy Ontology}
-        \only<3>{Xenopus Anatomy Ontology}
-        \only<4>{Mouse Anatomy Ontology}
-        \only<5>{\emph{C. elegans} Anatomy Ontology}
+        \only<2| handout:0>{Zebrafish Anatomy Ontology}
+        \only<3| handout:0>{Xenopus Anatomy Ontology}
+        \only<4| handout:0>{Mouse Anatomy Ontology}
+        \only<5| handout:0>{\emph{C. elegans} Anatomy Ontology}
       \end{overlayarea}
 
       Strategy for a multi-species ontology:
@@ -112,7 +112,7 @@
 \begin{frame}
   \frametitle{Example: integrating FBbt into Uberon}
 
-  \only<1>{
+  \only<1| handout:1>{
     \begin{columns}[t]
       \begin{column}{.45\textwidth}
         Uberon hierarchy
@@ -143,7 +143,7 @@
       \end{column}
     \end{columns}
   }
-  \only<2>{
+  \only<2| handout:2>{
     \begin{columns}
       \begin{column}{.3\textwidth}
         Integrated hierarchy:
@@ -498,17 +498,17 @@ intersection\_of: part\_of NCBITaxon:7227
   Examples of SSSOM/T-OWL rules
 
   \begin{overlayarea}{\textwidth}{3cm}
-    \only<1-2>{
+    \only<1-2| handout:1>{
       \begin{block}{Inverting a mapping}\ttfamily\scriptsize
         \textcolor<1>{red}{subject==UBERON:*} -> \textcolor<2>{red}{invert()};
       \end{block}
     }
-    \only<3-4>{
+    \only<3-4| handout:2>{
       \begin{block}{Generating a simple axiom}\ttfamily\scriptsize
         \textcolor<3>{red}{predicate==skos:broadMatch} -> \textcolor<4>{red}{create\_axiom("\%subject\_id SubClassOf: \%object\_id")};
       \end{block}
     }
-    \only<5-10>{
+    \only<5-10| handout:3>{
       \begin{block}{Generating a more complex axiom}\ttfamily\scriptsize
         \textcolor<5>{red}{subject==FBbt:*}\\
         \hspace{1cm} \&\& \textcolor<6>{red}{predicate==semapv:crossSpeciesExactMatch}\\
@@ -522,13 +522,13 @@ intersection\_of: part\_of NCBITaxon:7227
   \end{overlayarea}
 
   \begin{overlayarea}{\textwidth}{2.5cm}
-    \only<1-2>{\textcolor<1>{red}{Select mappings with a UBERON subject}
+    \only<1-2| handout:1>{\textcolor<1>{red}{Select mappings with a UBERON subject}
 
     and \textcolor<2>{red}{flip them around the predicate}}
-    \only<3-4>{\textcolor<3>{red}{Select mappings with a \emph{skos:broadMatch} predicate}
+    \only<3-4| handout:2>{\textcolor<3>{red}{Select mappings with a \emph{skos:broadMatch} predicate}
 
     and \textcolor<4>{red}{create a \emph{SubClassOf} axiom}}
-    \only<5-10>{Select mappings
+    \only<5-10| handout:3>{Select mappings
       \begin{itemize}
         \item \textcolor<5>{red}{with a FBbt subject}
         \item \textcolor<6>{red}{with a \emph{semapv:crossSpeciesExactMatch} predicate}
