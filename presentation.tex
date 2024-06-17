@@ -14,7 +14,7 @@
 \graphicspath{{imgs/}{svgs/}}
 
 % TikZ libraries and styles
-\usetikzlibrary{positioning,shapes.geometric,graphs,graphdrawing,quotes,fit}
+\usetikzlibrary{positioning,shapes.geometric,graphs,graphdrawing,quotes,fit,overlay-beamer-styles}
 \usegdlibrary{layered,trees}
 \colorlet{GenericItem}{yellow!20!white}
 \colorlet{GenericHighlight}{red!20!white}
@@ -54,12 +54,12 @@
   \begin{columns}
     \begin{column}{.5\textwidth}
       \begin{tikzpicture}[nodes={shape=circle,draw,fill=GenericItem}]
-        \node (core) {Uberon};
-        \node (fbbt) at (150:2cm) {FBbt};
-        \node (zfa)  at (90:2cm)  {ZFA};
-        \node (xao)  at (30:2cm)  {XAO};
-        \node (ma)   at (210:2cm) {MA};
-        \node (wbbt) at (270:2cm) {WBbt};
+        \node (core) [alt=<6>{fill=GenericHighlight}{}] {Uberon};
+        \node (fbbt) [alt=<{1,7}>{fill=GenericHighlight}{}] at (150:2cm) {FBbt};
+        \node (zfa)  [alt=<{2,7}>{fill=GenericHighlight}{}] at (90:2cm)  {ZFA};
+        \node (xao)  [alt=<{3,7}>{fill=GenericHighlight}{}] at (30:2cm)  {XAO};
+        \node (ma)   [alt=<{4,7}>{fill=GenericHighlight}{}] at (210:2cm) {MA};
+        \node (wbbt) [alt=<{5,7}>{fill=GenericHighlight}{}] at (270:2cm) {WBbt};
         \node (tx1) at  (310:2cm) {...};
         \node (tx2) at  (330:2cm) {...};
         \node (tx3) at  (350:2cm) {...};
@@ -69,15 +69,25 @@
       \end{tikzpicture}
     \end{column}
     \begin{column}{.45\textwidth}
-      Strategy:
+      Many species-specific anatomy ontologies available:
+      \smallskip
+      \begin{overlayarea}{\textwidth}{1cm}\color{red}
+        \only<1>{\emph{Drosophila} Anatomy Ontology}
+        \only<2>{Zebrafish Anatomy Ontology}
+        \only<3>{Xenopus Anatomy Ontology}
+        \only<4>{Mouse Anatomy Ontology}
+        \only<5>{\emph{C. elegans} Anatomy Ontology}
+      \end{overlayarea}
+
+      Strategy for a multi-species ontology:
       \begin{itemize}
-        \item Provide a taxon-neutral core framework
-        \item Integrate existing taxon-specific ontologies
+        \item Provide a \textcolor<6>{red}{taxon-neutral core framework}
+        \item Integrate \textcolor<7>{red}{existing taxon-specific ontologies}
       \end{itemize}
     \end{column}
   \end{columns}
 
-  \note{Anatomy ontologies are used in many aspects of biocuration, for
+  \note<1>{Anatomy ontologies are used in many aspects of biocuration, for
   example to capture the organ of origin of a biological sample, the tissue
   where a gene is expressed, or the anatomical location where a disease
   manifests itself.
@@ -100,7 +110,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Example: integration with FBbt}
+  \frametitle{Example: integrating FBbt into Uberon}
 
   \only<1>{
     \begin{columns}[t]
@@ -128,13 +138,18 @@
             };
           };
         \end{tikzpicture}
+
+        FBbt's ``heart'' is the fly-specific equivalent of Uberon's ``dorsal vessel heart''
       \end{column}
     \end{columns}
   }
   \only<2>{
     \begin{columns}
       \begin{column}{.3\textwidth}
-        Integrated hierarchy
+        Integrated hierarchy:
+
+        \smallskip
+        FBbt's ``heart'' classified under Uberon's ``dorsal vessel heart''
       \end{column}
       \begin{column}{.6\textwidth}
         \begin{tikzpicture}
@@ -221,13 +236,13 @@
   \frametitle{Overview of the previous integration system}
 
   \begin{columns}
-    \begin{column}{.44\textwidth}
-      \begin{tikzpicture}[node distance=.5cm]
-        \node [Entity] (uberon) {Uberon};
-        \node [Process,below right=of uberon] (script) {Custom script};
+    \begin{column}{.46\textwidth}
+      \begin{tikzpicture}[node distance=.3cm]
+        \node [Entity,text width=1.3cm,alt=<1>{fill=GenericHighlight}{}] (uberon) {Uberon\\(incl. xrefs)};
+        \node [Process,below right=of uberon,alt=<3>{fill=GenericHighlight}{}] (script) {Custom script};
         \node [Entity,above right=of script,align=left] (ssao) {Taxon-specific\\
                                                                 ontologies};
-        \node [Entity,below=of script] (cob) {Bridge files};
+        \node [Entity,below=of script,alt=<2>{fill=GenericHighlight}{}] (cob) {Bridge files};
         \node [Process,below=of cob] (merge) {OWL merge};
         \node [Entity,below=of merge] (cm) {Multi-species ontology};
         \draw [->] (uberon.east) -| (script.north) (script.south) -- (cob.north);
@@ -236,8 +251,8 @@
         \draw [->] (ssao.south) |- (merge.east);
       \end{tikzpicture}
     \end{column}
-    \begin{column}{.53\textwidth}
-      \begin{block}{Mappings maintained as xrefs}\scriptsize\ttfamily
+    \begin{column}{.51\textwidth}
+      \begin{block}{Mappings maintained as \textcolor<1>{red}{xrefs}}\scriptsize\ttfamily
 [Term]
 
 id: UBERON:0015230
@@ -246,10 +261,10 @@ name: dorsal vessel heart
 
 is\_a: UBERON:0007100 ! primary circulatory organ
 
-\textcolor{red}{xref: FBbt:00003154}
+\textcolor<1>{red}{xref: FBbt:00003154}
       \end{block}
   
-      \begin{block}{Xrefs transformed to bridge files}\scriptsize\ttfamily
+      \begin{block}{Xrefs transformed to \textcolor<2>{red}{bridge files}}\scriptsize\ttfamily
 [Term]
 
 id: FBbt:00003154
@@ -263,10 +278,10 @@ intersection\_of: part\_of NCBITaxon:7227
 
   \begin{itemize}
     \item Mappings not available to third parties
-    \item Pipeline highly Uberon-specific, inflexible and not reusable
+    \item \textcolor<3>{red}{Custom pipeline} highly Uberon-specific, inflexible and not reusable
   \end{itemize}
 
-  \note{Mappings are represented and maintained as \emph{cross-references}
+  \note<1>{Mappings are represented and maintained as \emph{cross-references}
   that are carried by the taxon-neutral terms in Uberon and that point to the
   taxon-specific terms in other ontologies -- as shown here, where Uberon's
   ``dorsal vessel heart'' term carries a ``xref'' to FBbt:00003154, which is
@@ -402,6 +417,9 @@ intersection\_of: part\_of NCBITaxon:7227
       };
     \end{tikzpicture}
   \end{center}
+
+  \emph{crossSpeciesExactMatch}: ``a match where the subject is considered analogous
+  to the object in a different taxonomic grouping''
 
   \note{One of the benefits of the SSSOM standard is that it does not simply
   allow to say that two terms are mapped, to each other.  As we've seen in the
@@ -546,24 +564,36 @@ intersection\_of: part\_of NCBITaxon:7227
 \begin{frame}
   \frametitle{New SSSOM-based integration pipeline}
 
-  \begin{center}
-    \begin{tikzpicture}[node distance=.5cm]
-      \node [Entity] (uberon) {Uberon};
-      \node [Entity,right=of uberon] (com) {Mapping sets};
-      \node [Entity,right=of com,align=left] (ssao) {Taxon-specific\\
-                                                     ontologies};
-      \node [Process,below=of com] (sssomt) {SSSOM/T-OWL};
-      \node [Entity,below=of sssomt] (cob) {Bridge files};
-      \node [Process,below=of cob] (merge) {OWL merge};
-      \node [Entity,below=of merge] (cm) {Multi-species ontology};
-      \draw [->] (com) -- (sssomt) (sssomt) -- (cob);
-      \draw [->] (cob) -- (merge) (merge) -- (cm);
-      \draw [->] (uberon.south) |- (merge.west);
-      \draw [->] (ssao.south) |- (merge.east);
-    \end{tikzpicture}
-  \end{center}
+  \begin{columns}
+    \begin{column}{.45\textwidth}
+      \begin{center}
+        \begin{tikzpicture}[node distance=.5cm]
+          \node [Entity] (uberon) {Uberon};
+          \node [Entity,right=of uberon] (com) {Mapping sets};
+          \node [Entity,right=of com,align=left] (ssao) {Taxon-specific\\
+                                                         ontologies};
+          \node [Process,below=of com,alt=<2>{fill=GenericHighlight}{}] (sssomt) {SSSOM/T-OWL};
+          \node [Entity,below=of sssomt] (cob) {Bridge files};
+          \node [Process,below=of cob,alt=<3>{fill=GenericHighlight}{}] (merge) {OWL merge};
+          \node [Entity,below=of merge] (cm) {Multi-species ontology};
+          \draw [->] (com) -- (sssomt) (sssomt) -- (cob);
+          \draw [->] (cob) -- (merge) (merge) -- (cm);
+          \draw [->] (uberon.south) |- (merge.west);
+          \draw [->] (ssao.south) |- (merge.east);
+        \end{tikzpicture}
+      \end{center}
+    \end{column}
+    \begin{column}{.45\textwidth}
+      \begin{enumerate}
+        \item Generating the bridge files through a \textcolor<2>{red}{SSSOM/T-OWL ruleset}\\
+              (\texttt{robot sssom:inject})
+        \item \textcolor<3>{red}{Merging} Uberon, the bridges, and the taxon-specific ontologies\\
+              (\texttt{robot merge})
+      \end{enumerate}
+    \end{column}
+  \end{columns}
 
-  \note{This leads us to our new, SSSOM-based integration pipeline for Uberon.
+  \note<1>{This leads us to our new, SSSOM-based integration pipeline for Uberon.
   That pipeline has three distinct inputs: (1) Uberon itself, (2) the mappings
   between Uberon and the taxon-specific ontologies (which are no longer
   embedded within the ontology itself), and (3) the taxon-specific ontologies.
