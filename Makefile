@@ -40,12 +40,12 @@ notes.pdf: notes.tex $(PRESENTATION_SOURCES)
 revision.tex:
 	git show -s --format='%aD %H' > revision.tex
 
-sssomt-uberon.tar.gz: revision.tex
+sssomt-uberon.tar.gz: revision.tex $(PNGS)
 	dir=$$(basename $$PWD) && \
 	tar czf $@ -C .. \
 		$$dir/{COPYING,Makefile,README.md,sssomt.bib} \
 		$$dir/{handout,notes,screen,presentation,paper,revision}.tex \
-		$$dir/svgs/{bridges,pipeline,relations,ccby}.svg
+		$$dir/svgs/{bridges,pipeline,relations,ccby}.{svg,png}
 
 archive: sssomt-uberon.tar.gz
 
